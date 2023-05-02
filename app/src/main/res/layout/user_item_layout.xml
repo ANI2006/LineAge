@@ -25,7 +25,8 @@
         app:cardElevation="5dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:onClick="@{()-> listener.onClickItem(userModel,true)}">
             <View
                 android:id="@+id/view"
                 android:layout_width="20dp"
@@ -73,21 +74,21 @@
                 android:src="@drawable/delete"
                 app:tint="#000000" />
 
-            <ImageView
-                android:id="@+id/imgEdit"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_below="@+id/imgDelete"
-                android:layout_alignParentEnd="true"
+<!--            <ImageView-->
+<!--                android:id="@+id/imgEdit"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_below="@+id/imgDelete"-->
+<!--                android:layout_alignParentEnd="true"-->
 
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="5dp"
+<!--                android:layout_marginTop="2dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:layout_marginBottom="5dp"-->
 
-                android:onClick="@{()-> listener.onClickItem(userModel,true)}"
-                android:src="@drawable/edit"
+<!-- -->
+<!--                android:src="@drawable/edit"-->
 
-                app:tint="#000000" />
+<!--                app:tint="#000000" />-->
 
 
         </RelativeLayout>
