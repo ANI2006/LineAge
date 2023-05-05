@@ -16,7 +16,10 @@
 
 
 
+
+
     <androidx.cardview.widget.CardView
+
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginHorizontal="20dp"
@@ -32,17 +35,25 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:background="#000000"/>
+            <ImageView
+                android:id="@+id/user_image"
+                android:layout_width="100dp"
+                android:background="@color/black"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_person_24"/>
+
+
             <TextView
                 android:id="@+id/txtUName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="99dp"
                 android:layout_toEndOf="@+id/view"
                 android:text="@{userModel.firstName ,default=FirstName}"
                 android:textColor="#000000"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
 
@@ -52,44 +63,41 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtUName"
                 android:layout_alignStart="@+id/txtUName"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="10dp"
                 android:drawablePadding="5dp"
                 android:text="@{userModel.lastName ,default=LastName}"
+
                 android:textSize="15sp"
                 android:textStyle="bold"
-
-                app:drawableTint="#000000"/>
-
-
+                app:drawableTint="#000000" />
 
             <ImageView
                 android:id="@+id/imgDelete"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginVertical="10dp"
-                android:layout_marginEnd="8dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="6dp"
+                android:layout_marginTop="6dp"
                 android:onClick="@{()-> listener.onClickItem(userModel,false)}"
 
                 android:src="@drawable/delete"
                 app:tint="#000000" />
 
-<!--            <ImageView-->
-<!--                android:id="@+id/imgEdit"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:layout_below="@+id/imgDelete"-->
-<!--                android:layout_alignParentEnd="true"-->
 
-<!--                android:layout_marginTop="2dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:layout_marginBottom="5dp"-->
-
-<!-- -->
-<!--                android:src="@drawable/edit"-->
-
-<!--                app:tint="#000000" />-->
-
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/ic_favorite_shadow_24"
+                android:textOff=""
+                android:textOn=""
+                android:layout_marginRight="6dp"
+                android:layout_marginBottom="6dp"/>
 
         </RelativeLayout>
 

@@ -14,6 +14,7 @@ import com.example.lineage6.databinding.FragmentFavoritesBinding;
 
 public class FavoritesFragment extends Fragment {
 
+
     private FragmentFavoritesBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
