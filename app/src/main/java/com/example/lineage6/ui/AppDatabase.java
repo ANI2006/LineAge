@@ -9,11 +9,11 @@ import androidx.room.RoomDatabase;
 import com.example.lineage6.ui.user.ProjectModel;
 import com.example.lineage6.ui.user.UserDao;
 
-@Database(entities = {ProjectModel.class},exportSchema = false,version = 3)
+@Database(entities = {ProjectModel.class},exportSchema = false,version = 4)
 public abstract class AppDatabase extends RoomDatabase {
 
 
-    public static  final String DATABASE_NAME="user_in_database.db";
+    public static  final String DATABASE_NAME="user_in_database1.db";
     public static AppDatabase instance;
     private static  final  Object LOCK=new Object();
     public   abstract UserDao userDao();

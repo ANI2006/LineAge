@@ -29,7 +29,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     public UserAdapter() {
-        super();
+        super() ;
     }
 
     @NonNull
