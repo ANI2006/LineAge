@@ -42,36 +42,63 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_person_24"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtUName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginStart="99dp"
-                android:layout_toEndOf="@+id/view"
-                android:text="@{userModel.firstName ,default=FirstName}"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
-            <TextView
 
-                android:id="@+id/txtLName"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginStart="100dp"
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txtUName"
-                android:layout_alignStart="@+id/txtUName"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="10dp"
-                android:drawablePadding="5dp"
-                android:text="@{userModel.lastName ,default=LastName}"
+                android:padding="6dp">
 
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:drawableTint="#000000" />
+                <TextView
+                    android:id="@+id/txtUName"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userModel.firstName, default=FirstName}"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtLName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@{userModel.lastName, default=LastName}"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:drawableTint="#000000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="100dp"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <TextView
+                    android:id="@+id/txtUGender"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{userModel.gender, default=Gender}"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+
+
+            </LinearLayout>
+
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/imgDelete"

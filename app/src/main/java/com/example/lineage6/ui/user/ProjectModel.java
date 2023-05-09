@@ -26,6 +26,7 @@ public class ProjectModel implements Parcelable {
     public int age;
     public String gender;
     public String description;
+    public String relation;
     //public Bitmap  image;
    // public String imagePath;
 
@@ -53,6 +54,8 @@ public class ProjectModel implements Parcelable {
         age = in.readInt();
         gender = in.readString();
         description = in.readString();
+        relation = in.readString();
+
        // imagePath = in.readString();
 
     }
@@ -65,7 +68,9 @@ public class ProjectModel implements Parcelable {
         dest.writeInt(age);
         dest.writeString(gender);
         dest.writeString(description);
-       // dest.writeString(imagePath);
+        dest.writeString(relation);
+
+        // dest.writeString(imagePath);
     }
 
     @Override
