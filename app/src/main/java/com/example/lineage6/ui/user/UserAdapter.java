@@ -4,6 +4,8 @@ import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -16,11 +18,14 @@ import com.example.lineage6.databinding.UserItemLayoutBinding;
 import com.example.lineage6.ui.AppDatabase;
 import com.example.lineage6.ui.OnClickItemInterface;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements Filterable {
 
     List<ProjectModel> projectModelList;
+    private List<ProjectModel> filteredProjectModelList;
+
     private OnClickItemInterface onClickItemInterface;
     UserItemLayoutBinding binding;
 
@@ -72,6 +77,37 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void setUsers(List<ProjectModel> projects) {
         projectModelList = projects;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String query = constraint.toString();
+                if (query.isEmpty()) {
+                    filteredProjectModelList = projectModelList;
+                } else {
+                    List<ProjectModel> filteredList = new ArrayList<>();
+                    for (ProjectModel projectModel : projectModelList) {
+                        if (projectModel.firstName.toLowerCase().contains(query.toLowerCase()) ||
+                                projectModel.lastName.toLowerCase().contains(query.toLowerCase())) {
+                            filteredList.add(projectModel);
+                        }
+                    }
+                    filteredProjectModelList = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredProjectModelList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredProjectModelList = (List<ProjectModel>) results.values;
+                notifyDataSetChanged();
+            }
+    };
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
