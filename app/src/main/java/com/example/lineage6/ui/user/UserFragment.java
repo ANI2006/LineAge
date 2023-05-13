@@ -81,10 +81,11 @@ import java.util.List;
                 }
             });
 
-            searchView = root.findViewById(R.id.searchView);
+            searchView =binding.searchView;
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
+                    adapter.getFilter().filter(query);
                     return false;
                 }
 
@@ -99,6 +100,7 @@ import java.util.List;
 
             return root;
         }
+
 
         @Override
         public void onClickItem(ProjectModel projectModel, boolean isEdit) {

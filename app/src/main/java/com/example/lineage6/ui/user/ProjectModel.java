@@ -10,8 +10,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
+
+import com.example.lineage6.ui.DateConverter;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
 
 @Entity(tableName = "user")
 public class ProjectModel implements Parcelable {
@@ -23,10 +27,14 @@ public class ProjectModel implements Parcelable {
 
     public String lastName;
 
-    public int age;
+    public String date;
     public String gender;
     public String description;
     public String relation;
+
+
+
+
     //public Bitmap  image;
    // public String imagePath;
 
@@ -51,10 +59,10 @@ public class ProjectModel implements Parcelable {
         uId = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
-        age = in.readInt();
         gender = in.readString();
         description = in.readString();
         relation = in.readString();
+        date = in.readString();
 
        // imagePath = in.readString();
 
@@ -65,10 +73,12 @@ public class ProjectModel implements Parcelable {
         dest.writeInt(uId);
         dest.writeString(firstName);
         dest.writeString(lastName);
-        dest.writeInt(age);
         dest.writeString(gender);
         dest.writeString(description);
         dest.writeString(relation);
+        dest.writeString(date);
+
+
 
         // dest.writeString(imagePath);
     }

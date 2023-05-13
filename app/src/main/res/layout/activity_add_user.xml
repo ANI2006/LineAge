@@ -102,7 +102,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.1"
+                    android:layout_weight="1"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeWidth="2dp"
                     app:hintAnimationEnabled="true">
@@ -120,41 +120,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_weight="0.6"
+                    android:layout_weight="1"
                     app:boxBackgroundMode="outline"
                     app:boxStrokeWidth="2dp"
                     app:hintAnimationEnabled="true">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edtAge"
+                    <EditText
+                        android:id="@+id/et_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Age"
-
-
-                        android:inputType="date|number"
-
-                        />
+                        android:hint="Date of Birth"
+                        android:focusable="false"
+                        android:inputType="date"
+                        android:clickable="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
 
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.3"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeWidth="2dp"
-                    android:layout_marginStart="10dp"
-                    app:hintAnimationEnabled="true">
 
-                    <AutoCompleteTextView
-                        android:id="@+id/edtRelation"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-
-                        android:hint=" Select Relation" />
-
-                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

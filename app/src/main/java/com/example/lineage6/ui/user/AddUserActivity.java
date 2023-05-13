@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -28,20 +29,24 @@ import com.example.lineage6.databinding.ActivityAddUserBinding;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 public class AddUserActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+    EditText etDate;
+    DatePickerDialog.OnDateSetListener setListener;
+
     ImageView imageView;
     FloatingActionButton button;
-    private EditText etSelectDate;
     private ActivityAddUserBinding binding;
-    private String firstName,lastName,description,gender,relation;
-    private int age;
+    private String firstName,lastName,description,gender,date;
+   // private int age;
     private final String[] genders={" Male"," Female"};
-    private final String[] relations={" Brother"," Mother"};
     private UserViewModel userViewModel;
     private ProjectModel projectModel;
     private boolean isEdit=false;
@@ -52,7 +57,14 @@ public class AddUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityAddUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-       // initDataPicker();
+        etDate=findViewById(R.id.et_date);
+
+        Calendar calendar=Calendar.getInstance();
+        final int year=calendar.get(Calendar.YEAR);
+        final int month=calendar.get(Calendar.MONTH);
+        final int day=calendar.get(Calendar.DAY_OF_MONTH);
+
+        // initDataPicker();
 
         initDropDown();
         userViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
@@ -64,9 +76,9 @@ public class AddUserActivity extends AppCompatActivity {
             binding.edtFirstName.setText(projectModel.firstName);
             binding.edtLastName.setText(projectModel.lastName);
             binding.edtGender.setText(projectModel.gender);
-            binding.edtAge.setText(String.valueOf(projectModel.age));
+         //   binding.edtAge.setText(String.valueOf(projectModel.age));
             binding.edtDescription.setText(projectModel.description);
-            binding.edtRelation.setText(projectModel.relation);
+            binding.etDate.setText(projectModel.date);
 
             isEdit=true;
 
@@ -81,18 +93,21 @@ public class AddUserActivity extends AppCompatActivity {
                 firstName=binding.edtFirstName.getText().toString().trim();
                 lastName=binding.edtLastName.getText().toString().trim();
                 gender=binding.edtGender.getText().toString().trim();
-                age=Integer.parseInt(binding.edtAge.getText().toString().trim());
+             //   age=Integer.parseInt(binding.edtAge.getText().toString().trim());
                 description=binding.edtDescription.getText().toString().trim();
-                relation=binding.edtRelation.getText().toString().trim();
+                date=binding.etDate.getText().toString().trim();
+
+
 
 
 
                 projectModel.firstName=firstName;
                 projectModel.lastName=lastName;
                 projectModel.gender=gender;
-                projectModel.age=age;
+               // projectModel.age=age;
                 projectModel.description=description;
-                projectModel.relation=relation;
+                projectModel.date=date;
+
 
 
                 userViewModel.updateUser(projectModel);
@@ -103,18 +118,20 @@ public class AddUserActivity extends AppCompatActivity {
                 firstName=binding.edtFirstName.getText().toString().trim();
                 lastName=binding.edtLastName.getText().toString().trim();
                 gender=binding.edtGender.getText().toString().trim();
-                age=Integer.parseInt(binding.edtAge.getText().toString().trim());
+              //  age=Integer.parseInt(binding.edtAge.getText().toString().trim());
                 description=binding.edtDescription.getText().toString().trim();
-                relation=binding.edtRelation.getText().toString().trim();
+                date=binding.etDate.getText().toString().trim();
+
+
 
 
                 projectModel=new ProjectModel();
                 projectModel.firstName=firstName;
                 projectModel.lastName=lastName;
                 projectModel.gender=gender;
-                projectModel.age=age;
+               // projectModel.age=age;
                 projectModel.description=description;
-                projectModel.relation=relation;
+                projectModel.date=date;
 
 
                 userViewModel.insertUser(projectModel);
@@ -125,6 +142,44 @@ public class AddUserActivity extends AppCompatActivity {
                 finish();
 
             }
+
+        });
+//        etDate.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,setListener,year,month,day);
+//                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                datePickerDialog.show();
+//
+//
+//            }
+//        });
+       etDate.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this,new DatePickerDialog.OnDateSetListener() {
+
+                   @Override
+                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                       month=month+1;
+                       String date=dayOfMonth+"/"+month+"/"+year;
+                       etDate.setText(date);
+
+                   }
+               },year,month,day);
+               datePickerDialog.show();
+           }
+
+       });
+
+
+
+
+
+
+            // Set the dob field on the ProjectModel
+
+
 //            dateButton=findViewById(R.id.edtAge);
 //            dateButton.setText(getTodaysDay());
 
@@ -151,7 +206,7 @@ public class AddUserActivity extends AppCompatActivity {
 //            });
 
 
-        });
+
 
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getColor(R.color.black)));
         imageView=findViewById(R.id.imageView);
@@ -181,12 +236,8 @@ public class AddUserActivity extends AppCompatActivity {
 //    }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Uri uri=data.getData();
-        imageView.setImageURI(uri);
-    }
+
+
 
     @Override
     public boolean onSupportNavigateUp(){
@@ -211,66 +262,8 @@ public class AddUserActivity extends AppCompatActivity {
         });
 
         // Create an ArrayAdapter for relations
-        ArrayAdapter<String> relationAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, relations);
-        binding.edtRelation.setAdapter(relationAdapter);
-        binding.edtRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                relation = (String) adapterView.getItemAtPosition(position);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
     }
 
 
-//    private void initDataPicker() {
-//        DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
-//            @Override
-//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                month=month+1;
-//                String date=makeDateString(dayOfMonth,month,year);
-//                dateButton.setText(date);
-//            }
-//        };
-//        Calendar cal=Calendar.getInstance();
-//        int year=cal.get(Calendar.YEAR);
-//        int month=cal.get(Calendar.MONTH);
-//        int day=cal.get(Calendar.DAY_OF_MONTH);
-//        int style= AlertDialog.BUTTON_POSITIVE;
-//        datePickerDialog=new DatePickerDialog(this,style,dateSetListener,year,month,day);
-//
-//
-//
-//    }
-
-//    private String makeDateString(int dayOfMonth, int month, int year) {
-//        return getMonthFormat(month) +" "+dayOfMonth+" "+year;
-//    }
-//
-//    private String getMonthFormat(int month) {
-//        if(month==1)return "JAN";
-//        if(month==2)return "FEB";
-//        if(month==3)return "MARCH";
-//        if(month==4)return "APRIL";
-//        if(month==5)return "MAY";
-//        if(month==6)return "JUN";
-//        if(month==7)return "JULY";
-//        if(month==8)return "AUG";
-//        if(month==9)return "SEP";
-//        if(month==10)return "OCT";
-//        if(month==11)return "NOV";
-//        if(month==12)return "DEC";
-//
-//
-//        return "JAN";
-//    }
-//
-//    public void openDatePicker(View view) {
-//
-//        datePickerDialog.show();
-//    }
 }
