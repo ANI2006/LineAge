@@ -177,38 +177,7 @@ public class AddUserActivity extends AppCompatActivity {
 
 
 
-            // Set the dob field on the ProjectModel
-
-
-//            dateButton=findViewById(R.id.edtAge);
-//            dateButton.setText(getTodaysDay());
-
-//            etSelectDate=findViewById(R.id.edtAge);
-//            final Calendar calendar=Calendar.getInstance();
-//            final int year=calendar.get(Calendar.YEAR);
-//            final int month=calendar.get(Calendar.MONTH);
-//            final int day=calendar.get(Calendar.DAY_OF_MONTH);
-//            etSelectDate.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    DatePickerDialog dialog=new DatePickerDialog(AddUserActivity.this, new DatePickerDialog.OnDateSetListener() {
-//                        @Override
-//                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                            month=month+1;
-//                            String date=dayOfMonth+"/"+month+"/"+year;
-//                            etSelectDate.setText(date);
-//                        }
-//                    },year,month,day);
-//                    dialog.show();
-//
-//
-//                }
-//            });
-
-
-
-
-        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getColor(R.color.black)));
+     //   Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getColor(R.color.red)));
         imageView=findViewById(R.id.imageView);
         button= findViewById(R.id.floatingActionButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -226,18 +195,13 @@ public class AddUserActivity extends AppCompatActivity {
 
     }
 
-//    private String getTodaysDay() {
-//        Calendar cal=Calendar.getInstance();
-//        int year=cal.get(Calendar.YEAR);
-//        int month=cal.get(Calendar.MONTH);
-//        month=month+1;
-//        int day=cal.get(Calendar.DAY_OF_MONTH);
-//        return makeDateString(day,month,year);
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Uri uri=data.getData();
+        imageView.setImageURI(uri);
 
-
-
-
+    }
 
     @Override
     public boolean onSupportNavigateUp(){
@@ -261,7 +225,6 @@ public class AddUserActivity extends AppCompatActivity {
             }
         });
 
-        // Create an ArrayAdapter for relations
 
     }
 

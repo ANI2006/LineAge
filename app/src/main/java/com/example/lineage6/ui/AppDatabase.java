@@ -12,12 +12,12 @@ import com.example.lineage6.ui.user.UserDao;
 
 import java.util.Date;
 
-@Database(entities = {ProjectModel.class},exportSchema = false,version = 7)
+@Database(entities = {ProjectModel.class},exportSchema = false,version = 8)
 public abstract class AppDatabase extends RoomDatabase {
 
 
 
-    public static  final String DATABASE_NAME="user_in_database4.db";
+    public static  final String DATABASE_NAME="user_in_database5.db";
     public static AppDatabase instance;
     private static  final  Object LOCK=new Object();
     public   abstract UserDao userDao();
