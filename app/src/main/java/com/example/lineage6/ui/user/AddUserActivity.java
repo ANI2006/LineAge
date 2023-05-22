@@ -1,15 +1,11 @@
 package com.example.lineage6.ui.user;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,17 +19,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.bumptech.glide.Glide;
 import com.example.lineage6.R;
 import com.example.lineage6.databinding.ActivityAddUserBinding;
+import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.mvvm.UserViewModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Objects;
 
 public class AddUserActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
@@ -44,9 +37,14 @@ public class AddUserActivity extends AppCompatActivity {
     ImageView imageView;
     FloatingActionButton button;
     private ActivityAddUserBinding binding;
-    private String firstName,lastName,description,gender,date;
+    private String firstName,lastName,description,gender,date,relation;
    // private int age;
     private final String[] genders={" Male"," Female"};
+    private final String[] relations={" Brother"," Mother"};
+
+
+
+
     private UserViewModel userViewModel;
     private ProjectModel projectModel;
     private boolean isEdit=false;
@@ -79,6 +77,8 @@ public class AddUserActivity extends AppCompatActivity {
          //   binding.edtAge.setText(String.valueOf(projectModel.age));
             binding.edtDescription.setText(projectModel.description);
             binding.etDate.setText(projectModel.date);
+            binding.edtRelation.setText(projectModel.relation);
+
 
             isEdit=true;
 
@@ -96,6 +96,7 @@ public class AddUserActivity extends AppCompatActivity {
              //   age=Integer.parseInt(binding.edtAge.getText().toString().trim());
                 description=binding.edtDescription.getText().toString().trim();
                 date=binding.etDate.getText().toString().trim();
+                relation=binding.edtRelation.getText().toString().trim();
 
 
 
@@ -107,6 +108,8 @@ public class AddUserActivity extends AppCompatActivity {
                // projectModel.age=age;
                 projectModel.description=description;
                 projectModel.date=date;
+                projectModel.relation=relation;
+
 
 
 
@@ -121,6 +124,8 @@ public class AddUserActivity extends AppCompatActivity {
               //  age=Integer.parseInt(binding.edtAge.getText().toString().trim());
                 description=binding.edtDescription.getText().toString().trim();
                 date=binding.etDate.getText().toString().trim();
+                relation=binding.edtRelation.getText().toString().trim();
+
 
 
 
@@ -132,6 +137,8 @@ public class AddUserActivity extends AppCompatActivity {
                // projectModel.age=age;
                 projectModel.description=description;
                 projectModel.date=date;
+                projectModel.relation=relation;
+
 
 
                 userViewModel.insertUser(projectModel);
@@ -214,6 +221,19 @@ public class AddUserActivity extends AppCompatActivity {
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, genders);
         binding.edtGender.setAdapter(genderAdapter);
         binding.edtGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                gender = (String) adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        });
+        ArrayAdapter<String> relationAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, relations);
+        binding.edtRelation.setAdapter(relationAdapter);
+        binding.edtRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 gender = (String) adapterView.getItemAtPosition(position);

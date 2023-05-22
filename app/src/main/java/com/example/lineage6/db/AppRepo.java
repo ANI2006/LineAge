@@ -1,11 +1,8 @@
-package com.example.lineage6.ui;
+package com.example.lineage6.db;
 
 import android.content.Context;
 
 import androidx.lifecycle.LiveData;
-
-import com.example.lineage6.ui.user.ProjectModel;
-import com.example.lineage6.ui.user.UserDao;
 
 import java.util.List;
 import java.util.concurrent.Callable;

@@ -1,6 +1,4 @@
-package com.example.lineage6.ui;
-
-import com.example.lineage6.ui.user.ProjectModel;
+package com.example.lineage6.db;
 
 public interface OnClickItemInterface {
 

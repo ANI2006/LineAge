@@ -1,21 +1,11 @@
-package com.example.lineage6.ui.user;
+package com.example.lineage6.db;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
-import androidx.room.TypeConverters;
-
-import com.example.lineage6.ui.DateConverter;
-
-import java.io.ByteArrayOutputStream;
-import java.util.Date;
 
 @Entity(tableName = "user")
 public class ProjectModel implements Parcelable {
@@ -31,6 +21,8 @@ public class ProjectModel implements Parcelable {
     public String gender;
     public String description;
     public String relation;
+
+
 
 
 

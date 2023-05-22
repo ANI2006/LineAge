@@ -1,32 +1,26 @@
 package com.example.lineage6.ui.user;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.lineage6.R;
 import com.example.lineage6.databinding.FragmentUserBinding;
-import com.example.lineage6.databinding.UserItemLayoutBinding;
-import com.example.lineage6.ui.OnClickItemInterface;
+import com.example.lineage6.db.OnClickItemInterface;
+import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.mvvm.UserViewModel;
 import com.example.lineage6.ui.favorites.FavoritesFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
     public class UserFragment extends Fragment implements OnClickItemInterface {

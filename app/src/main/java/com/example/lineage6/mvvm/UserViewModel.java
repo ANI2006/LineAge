@@ -1,4 +1,4 @@
-package com.example.lineage6.ui.user;
+package com.example.lineage6.mvvm;
 
 import android.app.Application;
 
@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.lineage6.ui.AppRepo;
+import com.example.lineage6.db.AppRepo;
+import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.db.UserDao;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

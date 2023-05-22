@@ -1,4 +1,4 @@
-package com.example.lineage6.ui.user;
+package com.example.lineage6.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

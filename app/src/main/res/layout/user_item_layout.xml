@@ -4,11 +4,11 @@
     <data>
         <variable
             name="userModel"
-            type="com.example.lineage6.ui.user.ProjectModel" />
+            type="com.example.lineage6.db.ProjectModel" />
 
         <variable
             name="listener"
-            type="com.example.lineage6.ui.OnClickItemInterface" />
+            type="com.example.lineage6.db.OnClickItemInterface" />
 
     </data>
 

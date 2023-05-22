@@ -1,22 +1,18 @@
 package com.example.lineage6.ui.user;
 
-import android.content.ClipData;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.lineage6.R;
 import com.example.lineage6.databinding.UserItemLayoutBinding;
-import com.example.lineage6.ui.AppDatabase;
-import com.example.lineage6.ui.OnClickItemInterface;
+import com.example.lineage6.db.OnClickItemInterface;
+import com.example.lineage6.db.ProjectModel;
 
 import java.util.ArrayList;
 import java.util.List;

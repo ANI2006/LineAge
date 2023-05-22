@@ -1,4 +1,4 @@
-package com.example.lineage6.ui;
+package com.example.lineage6.db;
 
 import androidx.room.TypeConverter;
 
