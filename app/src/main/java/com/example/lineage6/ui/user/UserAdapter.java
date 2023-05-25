@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lineage6.R;
 import com.example.lineage6.databinding.UserItemLayoutBinding;
 import com.example.lineage6.db.OnClickItemInterface;
-import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.db.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements Filterable {
 
-    List<ProjectModel> projectModelList;
-    private List<ProjectModel> filteredProjectModelList;
+    List<Person> personList;
+    private List<Person> filteredPersonList;
 
     private OnClickItemInterface onClickItemInterface;
     UserItemLayoutBinding binding;
@@ -44,10 +44,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (projectModelList != null) {
-            ProjectModel projectModel = projectModelList.get(position);
+        if (personList != null) {
+            Person person = personList.get(position);
 
-            holder.binding.setUserModel(projectModel);
+            holder.binding.setUserModel(person);
             holder.binding.setListener(onClickItemInterface);
 
 //            if (projectModel.imagePath != null) {
@@ -65,13 +65,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
 
     @Override
     public int getItemCount() {
-        if (projectModelList != null)
-            return projectModelList.size();
+        if (personList != null)
+            return personList.size();
         else return 0;
     }
 
-    public void setUsers(List<ProjectModel> projects) {
-        projectModelList = projects;
+    public void setUsers(List<Person> projects) {
+        personList = projects;
         notifyDataSetChanged();
     }
 
@@ -82,25 +82,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
             protected FilterResults performFiltering(CharSequence constraint) {
                 String query = constraint.toString();
                 if (query.isEmpty()) {
-                    filteredProjectModelList = projectModelList;
+                    filteredPersonList = personList;
                 } else {
-                    List<ProjectModel> filteredList = new ArrayList<>();
-                    for (ProjectModel projectModel : projectModelList) {
+                    List<Person> filteredList = new ArrayList<>();
+                    for (Person projectModel : personList) {
                         if (projectModel.firstName.toLowerCase().contains(query.toLowerCase()) ||
                                 projectModel.lastName.toLowerCase().contains(query.toLowerCase())) {
                             filteredList.add(projectModel);
                         }
                     }
-                    filteredProjectModelList = filteredList;
+                    filteredPersonList = filteredList;
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredProjectModelList;
+                filterResults.values = filteredPersonList;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                filteredProjectModelList = (List<ProjectModel>) results.values;
+                filteredPersonList = (List<Person>) results.values;
                 notifyDataSetChanged();
             }
     };

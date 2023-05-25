@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.lineage6.db.AppRepo;
-import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.db.Person;
 import com.example.lineage6.db.UserDao;
 
 import java.util.List;
@@ -30,23 +30,23 @@ public class UserViewModel extends AndroidViewModel {
         };
     }
 
-    public void insertUser(ProjectModel projectModel){
-        appRepo.insertUser(projectModel);
+    public void insertUser(Person person){
+        appRepo.insertUser(person);
     }
 
-    public void updateUser(ProjectModel projectModel){
-        appRepo.updateUser(projectModel);
+    public void updateUser(Person person){
+        appRepo.updateUser(person);
     }
 
-    public void deleteUser(ProjectModel projectModel){
-        appRepo.deleteUser(projectModel);
+    public void deleteUser(Person person){
+        appRepo.deleteUser(person);
     }
 
-    public LiveData<List<ProjectModel>> getAllUserFuture() throws ExecutionException,InterruptedException{
+    public LiveData<List<Person>> getAllUserFuture() throws ExecutionException,InterruptedException{
         return appRepo.getAllUserLive();
     }
 
-    public LiveData<List<ProjectModel>> getAllUserLive(){
+    public LiveData<List<Person>> getAllUserLive(){
         return appRepo.getAllUserLive();
     }
 }

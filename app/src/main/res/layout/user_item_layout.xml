@@ -4,7 +4,7 @@
     <data>
         <variable
             name="userModel"
-            type="com.example.lineage6.db.ProjectModel" />
+            type="com.example.lineage6.db.Person" />
 
         <variable
             name="listener"

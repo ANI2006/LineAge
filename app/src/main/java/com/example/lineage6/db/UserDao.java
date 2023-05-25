@@ -13,23 +13,23 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUser(ProjectModel projectModel);
+    void insertUser(Person person);
 
     @Update
-    void updateUser(ProjectModel projectModel);
+    void updateUser(Person person);
 
 
     @Delete
-    void deleteUser(ProjectModel projectModel);
+    void deleteUser(Person person);
 
     @Query("SELECT * FROM user")
-    LiveData<List<ProjectModel>> getAllUserLive();
+    LiveData<List<Person>> getAllUserLive();
 
     @Query("SELECT * FROM user")
-    List<ProjectModel> getAllUserFuture();
+    List<Person> getAllUserFuture();
 
     @Query("SELECT * FROM user WHERE uId=:id")
-    ProjectModel getUser(int id);
+    Person getUser(int id);
 
 
 

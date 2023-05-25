@@ -8,7 +8,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
-public class ProjectModel implements Parcelable {
+public class Person implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     public int uId;
 
@@ -43,11 +43,11 @@ public class ProjectModel implements Parcelable {
 //    }
 
 
-    public ProjectModel() {
+    public Person() {
 
     }
 
-    protected ProjectModel(Parcel in) {
+    protected Person(Parcel in) {
         uId = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
@@ -81,15 +81,15 @@ public class ProjectModel implements Parcelable {
     }
 
 
-    public static final Creator<ProjectModel> CREATOR = new Creator<ProjectModel>() {
+    public static final Creator<Person> CREATOR = new Creator<Person>() {
         @Override
-        public ProjectModel createFromParcel(Parcel in) {
-            return new ProjectModel(in);
+        public Person createFromParcel(Parcel in) {
+            return new Person(in);
         }
 
         @Override
-        public ProjectModel[] newArray(int size) {
-            return new ProjectModel[size];
+        public Person[] newArray(int size) {
+            return new Person[size];
         }
     };
 }

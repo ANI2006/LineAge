@@ -25,51 +25,51 @@ public abstract class AppRepo {
     }
 
 
-    public void  insertUser(ProjectModel projectModel){
+    public void  insertUser(Person person){
 
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appDatabase.userDao().insertUser(projectModel);
+                appDatabase.userDao().insertUser(person);
 
             }
         });
     }
 
-    public void updateUser(ProjectModel projectModel){
+    public void updateUser(Person person){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appDatabase.userDao().updateUser(projectModel);
+                appDatabase.userDao().updateUser(person);
             }
         });
     }
 
-    public void deleteUser(ProjectModel projectModel){
+    public void deleteUser(Person person){
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                appDatabase.userDao().deleteUser(projectModel);
+                appDatabase.userDao().deleteUser(person);
             }
         });
     }
 
-    public List<ProjectModel> getAllUserFuture() throws ExecutionException,InterruptedException {
+    public List<Person> getAllUserFuture() throws ExecutionException,InterruptedException {
 
-        Callable<List<ProjectModel>> callable=new Callable<List<ProjectModel>>() {
+        Callable<List<Person>> callable=new Callable<List<Person>>() {
             @Override
-            public List<ProjectModel> call() throws Exception {
+            public List<Person> call() throws Exception {
                 return appDatabase.userDao().getAllUserFuture();
             }
         };
 
-        Future<List<ProjectModel>> future=Executors.newSingleThreadExecutor().submit(callable);
+        Future<List<Person>> future=Executors.newSingleThreadExecutor().submit(callable);
         return future.get();
 
 
     }
 
-    public LiveData<List<ProjectModel>> getAllUserLive() {
+    public LiveData<List<Person>> getAllUserLive() {
 
         return appDatabase.userDao().getAllUserLive();
 

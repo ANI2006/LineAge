@@ -21,7 +21,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.lineage6.R;
 import com.example.lineage6.databinding.ActivityAddUserBinding;
-import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.db.Person;
 import com.example.lineage6.mvvm.UserViewModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -46,7 +46,7 @@ public class AddUserActivity extends AppCompatActivity {
 
 
     private UserViewModel userViewModel;
-    private ProjectModel projectModel;
+    private Person person;
     private boolean isEdit=false;
 
     @SuppressLint("RestrictedApi")
@@ -69,15 +69,15 @@ public class AddUserActivity extends AppCompatActivity {
 
         if (getIntent().hasExtra("model")){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                projectModel=getIntent().getParcelableExtra("model",ProjectModel.class);
+                person=getIntent().getParcelableExtra("model",Person.class);
             }
-            binding.edtFirstName.setText(projectModel.firstName);
-            binding.edtLastName.setText(projectModel.lastName);
-            binding.edtGender.setText(projectModel.gender);
+            binding.edtFirstName.setText(person.firstName);
+            binding.edtLastName.setText(person.lastName);
+            binding.edtGender.setText(person.gender);
          //   binding.edtAge.setText(String.valueOf(projectModel.age));
-            binding.edtDescription.setText(projectModel.description);
-            binding.etDate.setText(projectModel.date);
-            binding.edtRelation.setText(projectModel.relation);
+            binding.edtDescription.setText(person.description);
+            binding.etDate.setText(person.date);
+            binding.edtRelation.setText(person.relation);
 
 
             isEdit=true;
@@ -102,18 +102,18 @@ public class AddUserActivity extends AppCompatActivity {
 
 
 
-                projectModel.firstName=firstName;
-                projectModel.lastName=lastName;
-                projectModel.gender=gender;
+                person.firstName=firstName;
+                person.lastName=lastName;
+                person.gender=gender;
                // projectModel.age=age;
-                projectModel.description=description;
-                projectModel.date=date;
-                projectModel.relation=relation;
+                person.description=description;
+                person.date=date;
+                person.relation=relation;
 
 
 
 
-                userViewModel.updateUser(projectModel);
+                userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
 
                 finish();
@@ -130,18 +130,18 @@ public class AddUserActivity extends AppCompatActivity {
 
 
 
-                projectModel=new ProjectModel();
-                projectModel.firstName=firstName;
-                projectModel.lastName=lastName;
-                projectModel.gender=gender;
+                person=new Person();
+                person.firstName=firstName;
+                person.lastName=lastName;
+                person.gender=gender;
                // projectModel.age=age;
-                projectModel.description=description;
-                projectModel.date=date;
-                projectModel.relation=relation;
+                person.description=description;
+                person.date=date;
+                person.relation=relation;
 
 
 
-                userViewModel.insertUser(projectModel);
+                userViewModel.insertUser(person);
 
                 Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
 

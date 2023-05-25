@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.lineage6.databinding.FragmentUserBinding;
 import com.example.lineage6.db.OnClickItemInterface;
-import com.example.lineage6.db.ProjectModel;
+import com.example.lineage6.db.Person;
 import com.example.lineage6.mvvm.UserViewModel;
 import com.example.lineage6.ui.favorites.FavoritesFragment;
 
@@ -30,7 +30,7 @@ import java.util.List;
         private SearchView searchView;
 
         private UserAdapter adapter;
-        private List<ProjectModel> favoriteList;
+        private List<Person> favoriteList;
 
         private UserViewModel userViewModel;
         private ToggleButton toggleButton;
@@ -66,11 +66,11 @@ import java.util.List;
 
             userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
-            userViewModel.getAllUserLive().observe(getViewLifecycleOwner(), new Observer<List<ProjectModel>>() {
+            userViewModel.getAllUserLive().observe(getViewLifecycleOwner(), new Observer<List<Person>>() {
                 @Override
-                public void onChanged(List<ProjectModel> projectModelList) {
-                    if (projectModelList != null) {
-                        adapter.setUsers(projectModelList);
+                public void onChanged(List<Person> personList) {
+                    if (personList != null) {
+                        adapter.setUsers(personList);
                     }
                 }
             });
@@ -97,13 +97,13 @@ import java.util.List;
 
 
         @Override
-        public void onClickItem(ProjectModel projectModel, boolean isEdit) {
+        public void onClickItem(Person person, boolean isEdit) {
             if (isEdit) {
                 Intent intent = new Intent(getContext(), AddUserActivity.class);
-                intent.putExtra("model", projectModel);
+                intent.putExtra("model", person);
                 startActivity(intent);
             } else {
-                userViewModel.deleteUser(projectModel);
+                userViewModel.deleteUser(person);
             }
         }
 
