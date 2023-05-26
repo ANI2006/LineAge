@@ -5,6 +5,8 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +21,8 @@ import com.example.lineage6.mvvm.RelationViewModel;
 public class AddRelationDialog extends DialogFragment {
     private DialogAddRelationBinding binding;
     private RelationViewModel relationViewModel;
+    private String[] relationList;
+    private String relation;
 
     @Nullable
     @Override
@@ -26,6 +30,7 @@ public class AddRelationDialog extends DialogFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog_add_relation, container, false);
         return binding.getRoot();
     }
+
 
     @Override
     public void onResume() {
@@ -37,7 +42,11 @@ public class AddRelationDialog extends DialogFragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+
         super.onViewCreated(view, savedInstanceState);
+        relationList = getResources().getStringArray(R.array.relation_list);
+
+        initDropDown();
 
 
         relationViewModel = new ViewModelProvider(requireActivity()).get(RelationViewModel.class);
@@ -48,4 +57,22 @@ public class AddRelationDialog extends DialogFragment {
                 }
         );
     }
+
+    private void initDropDown() {
+        // Create an ArrayAdapter for relations
+        ArrayAdapter<String> relationAdapter = new ArrayAdapter<>(getContext(), android.R.layout.select_dialog_item, relationList);
+        binding.relationBetween.setAdapter(relationAdapter);
+        binding.relationBetween.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                relation = (String) adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        });
+    }
+
 }

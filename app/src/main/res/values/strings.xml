@@ -10,6 +10,55 @@
     <string name="relation_between">Relation Between</string>
     <string name="add_relation_button">Add Relation</string>
     <string name="make_relations">Make your relations</string>
+    <string-array name="relation_list">
+        <item>aunt</item>
+        <item>baby</item>
+        <item>brother</item>
+        <item>boyfriend</item>
+        <item>bride</item>
+        <item>brother</item>
+        <item>cousin</item>
+        <item>dad</item>
+        <item>daughter</item>
+        <item>father</item>
+        <item>father-in-law</item>
+        <item>fiancé</item>
+        <item>fiancée</item>
+        <item>friend</item>
+        <item>girlfriend</item>
+        <item>godchild</item>
+        <item>godfather</item>
+        <item>godmother</item>
+        <item>grandchild</item>
+        <item>granddaughter</item>
+        <item>grandfather</item>
+        <item>granddad</item>
+        <item>grandpa</item>
+        <item>grandmother</item>
+        <item>grandma</item>
+        <item>grandson</item>
+        <item>great-grandparents</item>
+        <item>groom</item>
+        <item>half-brother</item>
+        <item>husband</item>
+        <item>mother</item>
+        <item>mother-in-law</item>
+        <item>mum</item>
+        <item>mummy</item>
+        <item>mom</item>
+        <item>nephew</item>
+        <item>niece</item>
+        <item>parent</item>
+        <item>parents</item>
+        <item>sister</item>
+        <item>son</item>
+        <item>stepbrother</item>
+        <item>twin</item>
+        <item>twin-brother</item>
+        <item>uncle</item>
+        <item>wife</item>
+    </string-array>
+
 
 
 

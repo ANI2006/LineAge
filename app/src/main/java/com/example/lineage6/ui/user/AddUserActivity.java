@@ -3,6 +3,7 @@ package com.example.lineage6.ui.user;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class AddUserActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
@@ -98,20 +100,13 @@ public class AddUserActivity extends AppCompatActivity {
                 date=binding.etDate.getText().toString().trim();
                 relation=binding.edtRelation.getText().toString().trim();
 
-
-
-
-
                 person.firstName=firstName;
                 person.lastName=lastName;
                 person.gender=gender;
-               // projectModel.age=age;
+
                 person.description=description;
                 person.date=date;
                 person.relation=relation;
-
-
-
 
                 userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
@@ -125,10 +120,6 @@ public class AddUserActivity extends AppCompatActivity {
                 description=binding.edtDescription.getText().toString().trim();
                 date=binding.etDate.getText().toString().trim();
                 relation=binding.edtRelation.getText().toString().trim();
-
-
-
-
 
                 person=new Person();
                 person.firstName=firstName;
@@ -151,16 +142,7 @@ public class AddUserActivity extends AppCompatActivity {
             }
 
         });
-//        etDate.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,setListener,year,month,day);
-//                datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//                datePickerDialog.show();
-//
-//
-//            }
-//        });
+
        etDate.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -180,11 +162,6 @@ public class AddUserActivity extends AppCompatActivity {
        });
 
 
-
-
-
-
-     //   Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getColor(R.color.red)));
         imageView=findViewById(R.id.imageView);
         button= findViewById(R.id.floatingActionButton);
         button.setOnClickListener(new View.OnClickListener() {
@@ -231,19 +208,19 @@ public class AddUserActivity extends AppCompatActivity {
                 // Do nothing
             }
         });
-        ArrayAdapter<String> relationAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, relations);
-        binding.edtRelation.setAdapter(relationAdapter);
-        binding.edtRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                gender = (String) adapterView.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
-            }
-        });
+//        ArrayAdapter<String> relationAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, relations);
+//        binding.edtRelation.setAdapter(relationAdapter);
+//        binding.edtRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+//                gender = (String) adapterView.getItemAtPosition(position);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                // Do nothing
+//            }
+//        });
 
 
     }

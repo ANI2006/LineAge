@@ -16,10 +16,13 @@
 
 
         <EditText
+
             android:id="@+id/person1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:inputType="textCapWords"
+
 
             android:hint="@string/person1"
             android:textSize="20sp"
@@ -28,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/relation_between"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,6 +52,8 @@
             android:textAlignment="center"
             android:hint="@string/person2"
             android:textSize="20sp"
+            android:inputType="textCapWords"
+
             app:layout_constraintTop_toBottomOf="@id/relation_between"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

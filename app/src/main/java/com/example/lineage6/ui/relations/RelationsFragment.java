@@ -1,5 +1,4 @@
 package com.example.lineage6.ui.relations;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
