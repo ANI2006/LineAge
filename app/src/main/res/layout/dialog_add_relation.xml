@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
 
-            android:text="@string/person1"
+            android:hint="@string/person1"
             android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/relation_between"
@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
 
-            android:text="@string/relation_between"
+            android:hint="@string/relation_between"
             android:textSize="20sp" />
 
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="@string/person2"
+            android:hint="@string/person2"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/relation_between"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,6 +71,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:enabled="@{person1.text.length() &gt; 0 &amp;&amp; person2.text.length() &gt; 0 &amp;&amp; relationBetween.text.length() &gt; 0}"
+
 
             android:textStyle="bold" />
 

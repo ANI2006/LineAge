@@ -17,6 +17,8 @@ public abstract class AppRepo {
 
     private AppDatabase appDatabase;
     public   abstract UserDao userDao();
+    //public   abstract RelationDao relationDao();
+
     private Executor executor= Executors.newSingleThreadExecutor();
 
     public AppRepo(Context context){

@@ -1,4 +1,4 @@
-package com.example.lineage6.ui.user;
+package com.example.lineage6.ui.relations;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;

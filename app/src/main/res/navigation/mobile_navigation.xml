@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_user" />
 
     <fragment
-        android:id="@+id/navigation_favorites"
-        android:name="com.example.lineage6.ui.favorites.FavoritesFragment"
-        android:label="@string/title_favorites"
-        tools:layout="@layout/fragment_favorites" />
+        android:id="@+id/navigation_relations"
+        android:name="com.example.lineage6.ui.relations.RelationsFragment"
+        android:label="@string/title_relations"
+        tools:layout="@layout/fragment_relations" />
 
     <fragment
         android:id="@+id/navigation_settings"

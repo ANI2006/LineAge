@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.lineage6.db.AppRepo;
 import com.example.lineage6.db.Person;
+import com.example.lineage6.db.RelationDao;
 import com.example.lineage6.db.UserDao;
 
 import java.util.List;
@@ -27,6 +28,10 @@ public class UserViewModel extends AndroidViewModel {
             public UserDao userDao() {
                 return null;
             }
+            public RelationDao relationDao() {
+                return null;
+            }
+
         };
     }
 

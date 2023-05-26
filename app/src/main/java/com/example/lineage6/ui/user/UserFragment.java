@@ -19,7 +19,7 @@ import com.example.lineage6.databinding.FragmentUserBinding;
 import com.example.lineage6.db.OnClickItemInterface;
 import com.example.lineage6.db.Person;
 import com.example.lineage6.mvvm.UserViewModel;
-import com.example.lineage6.ui.favorites.FavoritesFragment;
+import com.example.lineage6.ui.relations.RelationsFragment;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ import java.util.List;
 
         private UserViewModel userViewModel;
         private ToggleButton toggleButton;
-        private FavoritesFragment favoritesFragment;
+        private RelationsFragment favoritesFragment;
 
 
         public UserFragment() {
