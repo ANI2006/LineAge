@@ -15,6 +15,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public static AppDatabase instance;
     private static  final  Object LOCK=new Object();
     public   abstract UserDao userDao();
+    public abstract RelationDao relationDao();
+
 
     public static AppDatabase getInstance(Context context){
         if(instance == null){
