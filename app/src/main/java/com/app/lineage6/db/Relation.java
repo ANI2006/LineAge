@@ -3,10 +3,16 @@ package com.app.lineage6.db;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
-@Entity(tableName = "Relations")
+@Entity(tableName = "Relations"
+//        ,foreignKeys = @ForeignKey(entity = Person.class,parentColumns = "u_id",
+//childColumns ="u_id",
+//onDelete = ForeignKey.CASCADE),indices = {@Index("u_id")}
+)
 public class Relation {
 
     @PrimaryKey(autoGenerate = true)

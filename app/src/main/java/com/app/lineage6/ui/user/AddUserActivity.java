@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -74,8 +76,12 @@ public class AddUserActivity extends AppCompatActivity {
             }
             binding.edtName.setText(person.name);
 
-            binding.edtGender.setText(person.gender);
-         //   binding.edtAge.setText(String.valueOf(projectModel.age));
+            if (person.gender.equals("Male")) {
+                binding.radioButtonMale.setChecked(true);
+            } else if (person.gender.equals("Female")) {
+                binding.radioButtonFemale.setChecked(true);
+            }
+            //   binding.edtAge.setText(String.valueOf(projectModel.age));
             binding.edtDescription.setText(person.description);
             binding.etDate.setText(person.date);
             binding.edtRelation.setText(person.relation);
@@ -90,59 +96,58 @@ public class AddUserActivity extends AppCompatActivity {
 //        getSupportActionBar().setShowHideAnimationEnabled(true);
 
         binding.btnAddUser.setOnClickListener(view -> {
+            if (isEdit) {
+                name = binding.edtName.getText().toString().trim();
+                String selectedGender = "";
+                int selectedGenderId = binding.radioGroupGender.getCheckedRadioButtonId();
+                if (selectedGenderId == R.id.radioButtonMale) {
+                    selectedGender = "Male";
+                } else if (selectedGenderId == R.id.radioButtonFemale) {
+                    selectedGender = "Female";
+                }
+                description = binding.edtDescription.getText().toString().trim();
+                date = binding.etDate.getText().toString().trim();
+                relation = binding.edtRelation.getText().toString().trim();
 
-            if(isEdit){
-                name=binding.edtName.getText().toString().trim();
-                gender=binding.edtGender.getText().toString().trim();
-             //   age=Integer.parseInt(binding.edtAge.getText().toString().trim());
-                description=binding.edtDescription.getText().toString().trim();
-                date=binding.etDate.getText().toString().trim();
-                relation=binding.edtRelation.getText().toString().trim();
-               // profileImageUrl=binding.imageView.getText().toString().trim();
-
-
-                person.name=name;
-
-                person.gender=gender;
-
-                person.description=description;
-                person.date=date;
-                person.relation=relation;
+                person.name = name;
+                person.gender = selectedGender;
+                person.description = description;
+                person.date = date;
+                person.relation = relation;
 
                 userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
 
                 finish();
-            }else {
-                name=binding.edtName.getText().toString().trim();
-                gender=binding.edtGender.getText().toString().trim();
-              //  age=Integer.parseInt(binding.edtAge.getText().toString().trim());
-                description=binding.edtDescription.getText().toString().trim();
-                date=binding.etDate.getText().toString().trim();
-                relation=binding.edtRelation.getText().toString().trim();
+            } else {
+                name = binding.edtName.getText().toString().trim();
+                String selectedGender = "";
+                int selectedGenderId = binding.radioGroupGender.getCheckedRadioButtonId();
+                if (selectedGenderId == R.id.radioButtonMale) {
+                    selectedGender = "Male";
+                } else if (selectedGenderId == R.id.radioButtonFemale) {
+                    selectedGender = "Female";
+                }
+                description = binding.edtDescription.getText().toString().trim();
+                date = binding.etDate.getText().toString().trim();
+                relation = binding.edtRelation.getText().toString().trim();
 
-                person=new Person();
-                person.name=name;
-                person.gender=gender;
-               // projectModel.age=age;
-                person.description=description;
-                person.date=date;
-                person.relation=relation;
-
-
+                person = new Person();
+                person.name = name;
+                person.gender = selectedGender;
+                person.description = description;
+                person.date = date;
+                person.relation = relation;
 
                 userViewModel.insertUser(person);
 
                 Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
 
-
                 finish();
-
             }
-
         });
 
-       etDate.setOnClickListener(new View.OnClickListener() {
+        etDate.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
                DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this,new DatePickerDialog.OnDateSetListener() {
@@ -159,21 +164,21 @@ public class AddUserActivity extends AppCompatActivity {
            }
 
        });
-        binding.edtGender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedGender = parent.getItemAtPosition(position).toString();
-
-                // Update the imageView based on the selected gender
-                if (selectedGender.equalsIgnoreCase("Male")) {
-                    imageView.setImageResource(R.drawable.baseline_favorite_24);
-                } else if (selectedGender.equalsIgnoreCase("Female")) {
-                    imageView.setImageResource(R.drawable.ic_baseline_delete);
-                } else {
-                    imageView.setImageResource(R.drawable.ic_person_24); // Default image
-                }
-            }
-        });
+//        binding.radioGroupGender.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                String selectedGender = parent.getItemAtPosition(position).toString();
+//
+//                // Update the imageView based on the selected gender
+//                if (selectedGender.equalsIgnoreCase("Male")) {
+//                    imageView.setImageResource(R.drawable.baseline_favorite_24);
+//                } else if (selectedGender.equalsIgnoreCase("Female")) {
+//                    imageView.setImageResource(R.drawable.ic_baseline_delete);
+//                } else {
+//                    imageView.setImageResource(R.drawable.ic_person_24); // Default image
+//                }
+//            }
+//        });
 
 
 
@@ -208,25 +213,29 @@ public class AddUserActivity extends AppCompatActivity {
         return super.onSupportNavigateUp();
     }
 
-    private void initDropDown(){
-        // Create an ArrayAdapter for genders
-        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, genders);
-        binding.edtGender.setAdapter(genderAdapter);
-        binding.edtGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    private void initDropDown() {
+        imageView = findViewById(R.id.imageView);
+        binding.radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                gender = (String) adapterView.getItemAtPosition(position);
-            }
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = findViewById(checkedId);
+                String selectedGender = radioButton.getText().toString().trim();
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                // Do nothing
+                // Update the imageView based on the selected gender
+                if (selectedGender.equalsIgnoreCase("Male")) {
+                    imageView.setImageResource(R.drawable.male_profile);
+                } else if (selectedGender.equalsIgnoreCase("Female")) {
+                    imageView.setImageResource(R.drawable.female_profile);
+                } else {
+                    imageView.setImageResource(R.drawable.ic_person_24); // Default image
+                }
             }
         });
 
-
-
     }
+
+
+
 
 
 }

@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "user")
 public class Person implements Parcelable {
     @PrimaryKey(autoGenerate = true)
+
     public int uId;
 
     @ColumnInfo(name="u_first_name")
