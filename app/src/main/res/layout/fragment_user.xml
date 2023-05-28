@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
 
-    tools:context=".ui.user.UserFragment"
+    tools:context="com.app.lineage6.ui.user.UserFragment"
     >
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"

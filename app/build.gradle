@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.lineage6'
+    namespace 'com.app.lineage6'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.lineage6"
+        applicationId "com.app.lineage6"
         minSdk 24
         targetSdk 33
         versionCode 1

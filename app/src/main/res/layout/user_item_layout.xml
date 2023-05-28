@@ -4,11 +4,11 @@
     <data>
         <variable
             name="userModel"
-            type="com.example.lineage6.db.Person" />
+            type="com.app.lineage6.db.Person" />
 
         <variable
             name="listener"
-            type="com.example.lineage6.db.OnClickItemInterface" />
+            type="com.app.lineage6.db.OnClickItemInterface" />
 
     </data>
 
@@ -34,13 +34,14 @@
                 android:id="@+id/view"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:background="#000000"/>
+                android:background="#ffff"/>
             <ImageView
                 android:id="@+id/user_image"
                 android:layout_width="100dp"
-                android:background="@color/black"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_person_24"/>
+
+                android:src="@{userModel.gender.equals(`Male`) ? @drawable/male_profile : @drawable/female_profile}" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,46 +58,62 @@
 
                 android:padding="6dp">
 
+
                 <TextView
                     android:id="@+id/txtUName"
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{userModel.firstName, default=FirstName}"
+                    android:text="@{userModel.name, default=Name}"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtLName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@{userModel.lastName, default=LastName}"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    app:drawableTint="#000000" />
 
             </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="100dp"
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="100dp"
-                android:orientation="horizontal"
-                android:padding="6dp">
+                    android:padding="6dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="17sp"
+                        android:text="Birth Date:  "/>
 
-                <TextView
-                    android:id="@+id/txtUGender"
+                    <TextView
+                        android:id="@+id/txtUDate"
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{userModel.gender, default=Gender}"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{userModel.date, default=Date}"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginStart="100dp"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="6dp">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txtUGender"-->
+
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@{userModel.gender, default=Gender}"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold" />-->
 
 
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
             </LinearLayout>
 
