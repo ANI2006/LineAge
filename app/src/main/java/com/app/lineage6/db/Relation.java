@@ -8,11 +8,7 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
-@Entity(tableName = "Relations"
-//        ,foreignKeys = @ForeignKey(entity = Person.class,parentColumns = "u_id",
-//childColumns ="u_id",
-//onDelete = ForeignKey.CASCADE),indices = {@Index("u_id")}
-)
+@Entity(tableName = "Relations")
 public class Relation {
 
     @PrimaryKey(autoGenerate = true)

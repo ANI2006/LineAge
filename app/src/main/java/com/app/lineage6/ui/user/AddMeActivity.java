@@ -7,8 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,9 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-
 import com.app.lineage6.R;
-import com.app.lineage6.databinding.ActivityAddUserBinding;
+import com.app.lineage6.databinding.ActivityAddMeBinding;
 import com.app.lineage6.db.Person;
 import com.app.lineage6.mvvm.UserViewModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -31,17 +29,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Calendar;
 
-public class AddUserActivity extends AppCompatActivity {
+public class AddMeActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
-    private Button dateButton;
     EditText etDate;
     DatePickerDialog.OnDateSetListener setListener;
+
     ImageView imageView;
     FloatingActionButton button;
-    private ActivityAddUserBinding binding;
-    private String name,description,date,relation;
-   // private int age;
-    private String[] relationList;
+    private ActivityAddMeBinding binding;
+    private String name,description,date;
+    // private int age;
 
     private UserViewModel userViewModel;
     private Person person;
@@ -51,19 +48,13 @@ public class AddUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        binding= ActivityAddUserBinding.inflate(getLayoutInflater());
+        binding= ActivityAddMeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        etDate=findViewById(R.id.et_date);
-
-        relationList = getResources().getStringArray(R.array.relation_list);
-
-
+        etDate=findViewById(R.id.et_date_m);
         Calendar calendar=Calendar.getInstance();
         final int year=calendar.get(Calendar.YEAR);
         final int month=calendar.get(Calendar.MONTH);
         final int day=calendar.get(Calendar.DAY_OF_MONTH);
-
-        // initDataPicker();
 
         initDropDown();
         userViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
@@ -72,70 +63,59 @@ public class AddUserActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 person=getIntent().getParcelableExtra("model",Person.class);
             }
-            binding.edtName.setText(person.name);
+            binding.edtNameM.setText(person.name);
 
             if (person.gender.equals("Male")) {
                 binding.radioButtonMale.setChecked(true);
             } else if (person.gender.equals("Female")) {
                 binding.radioButtonFemale.setChecked(true);
             }
-            //   binding.edtAge.setText(String.valueOf(projectModel.age));
             binding.edtDescription.setText(person.description);
-            binding.etDate.setText(person.date);
-            binding.edtRelation.setText(person.relation);
-
-
+            binding.etDateM.setText(person.date);
 
             isEdit=true;
 
-
         }
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setShowHideAnimationEnabled(true);
 
-        binding.btnAddUser.setOnClickListener(view -> {
+
+        binding.btnAddUserM.setOnClickListener(view -> {
             if (isEdit) {
-                name = binding.edtName.getText().toString().trim();
+                name = binding.edtNameM.getText().toString().trim();
                 String selectedGender = "";
-                int selectedGenderId = binding.radioGroupGender.getCheckedRadioButtonId();
+                int selectedGenderId = binding.radioGroupGenderM.getCheckedRadioButtonId();
                 if (selectedGenderId == R.id.radioButtonMale) {
                     selectedGender = "Male";
                 } else if (selectedGenderId == R.id.radioButtonFemale) {
                     selectedGender = "Female";
                 }
                 description = binding.edtDescription.getText().toString().trim();
-                date = binding.etDate.getText().toString().trim();
-                relation = binding.edtRelation.getText().toString().trim();
+                date = binding.etDateM.getText().toString().trim();
 
                 person.name = name;
                 person.gender = selectedGender;
                 person.description = description;
                 person.date = date;
-                person.relation = relation;
 
                 userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
 
                 finish();
             } else {
-                name = binding.edtName.getText().toString().trim();
+                name = binding.edtNameM.getText().toString().trim();
                 String selectedGender = "";
-                int selectedGenderId = binding.radioGroupGender.getCheckedRadioButtonId();
+                int selectedGenderId = binding.radioGroupGenderM.getCheckedRadioButtonId();
                 if (selectedGenderId == R.id.radioButtonMale) {
                     selectedGender = "Male";
                 } else if (selectedGenderId == R.id.radioButtonFemale) {
                     selectedGender = "Female";
                 }
                 description = binding.edtDescription.getText().toString().trim();
-                date = binding.etDate.getText().toString().trim();
-                relation = binding.edtRelation.getText().toString().trim();
-
+                date = binding.etDateM.getText().toString().trim();
                 person = new Person();
                 person.name = name;
                 person.gender = selectedGender;
                 person.description = description;
                 person.date = date;
-                person.relation = relation;
 
                 userViewModel.insertUser(person);
 
@@ -146,24 +126,22 @@ public class AddUserActivity extends AppCompatActivity {
         });
 
         etDate.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(AddMeActivity.this,new DatePickerDialog.OnDateSetListener() {
 
-                   @Override
-                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                       month=month+1;
-                       String date=dayOfMonth+"/"+month+"/"+year;
-                       etDate.setText(date);
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month=month+1;
+                        String date=dayOfMonth+"/"+month+"/"+year;
+                        etDate.setText(date);
 
-                   }
-               },year,month,day);
-               datePickerDialog.show();
-           }
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
 
-       });
-
-
+        });
 
         imageView=findViewById(R.id.imageView);
         button= findViewById(R.id.floatingActionButton);
@@ -171,7 +149,7 @@ public class AddUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                ImagePicker.with(AddUserActivity.this)
+                ImagePicker.with(AddMeActivity.this)
                         .crop()	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
@@ -198,7 +176,7 @@ public class AddUserActivity extends AppCompatActivity {
 
     private void initDropDown() {
         imageView = findViewById(R.id.imageView);
-        binding.radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.radioGroupGenderM.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = findViewById(checkedId);
@@ -210,26 +188,12 @@ public class AddUserActivity extends AppCompatActivity {
                 } else if (selectedGender.equalsIgnoreCase("Female")) {
                     imageView.setImageResource(R.drawable.female_profile);
                 } else {
-                    imageView.setImageResource(R.drawable.ic_person_24);
+                    imageView.setImageResource(R.drawable.ic_person_24); // Default image
                 }
             }
         });
 
-        ArrayAdapter<String> relationAdapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_item, relationList);
-        binding.edtRelation.setAdapter(relationAdapter);
-        binding.edtRelation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                relation = (String) adapterView.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
     }
 
 }
+

@@ -118,5 +118,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> im
         }
 
     }
+    public  void deleteUser(int position){
+        this.personList.remove(position);
+        notifyItemRemoved(position);
+    }
+    public Person getUserAt(int position){
+        return personList.get(position);
+    }
+
+
 
 }

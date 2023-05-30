@@ -13,7 +13,9 @@ import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.lineage6.databinding.FragmentUserBinding;
 import com.app.lineage6.mvvm.UserViewModel;
@@ -37,9 +39,11 @@ import java.util.List;
         private RelationsFragment favoritesFragment;
 
 
+
         public UserFragment() {
             // Required empty public constructor
         }
+
 
 
 
@@ -49,16 +53,15 @@ import java.util.List;
 
             binding = FragmentUserBinding.inflate(inflater, container, false);
             View root = binding.getRoot();
-
             super.onCreate(savedInstanceState);
-
-
 
 
 
             binding.projectRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             adapter = new UserAdapter(this);
             binding.projectRecyclerView.setAdapter(adapter);
+
+
 
             binding.addUser.setOnClickListener(view -> {
                 startActivity(new Intent(getContext(), AddUserActivity.class));
@@ -89,6 +92,18 @@ import java.util.List;
                     return false;
                 }
             });
+            new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT| ItemTouchHelper.RIGHT) {
+                @Override
+                public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                    userViewModel.deleteUser(adapter.getUserAt(viewHolder.getAdapterPosition()));
+
+                }
+            }).attachToRecyclerView(binding.projectRecyclerView);
 
 
 
@@ -106,7 +121,6 @@ import java.util.List;
                 userViewModel.deleteUser(person);
             }
         }
-
 
 
         @Override

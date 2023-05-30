@@ -75,8 +75,12 @@ public abstract class AppRepo {
 
         return appDatabase.userDao().getAllUserLive();
 
-
-
     }
+//    public LiveData<List<Person>> getAllUserNames() {
+//
+//        return (LiveData<List<Person>>) appDatabase.userDao().getUserNames();
+//
+//    }
+
 
 }

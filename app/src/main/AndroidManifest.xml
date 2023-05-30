@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.app.lineage6.ui.user.AddUserActivity"></activity>
+        <activity android:name="com.app.lineage6.ui.user.AddMeActivity"></activity>
 
     </application>
 

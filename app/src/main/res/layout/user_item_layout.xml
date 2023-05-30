@@ -12,12 +12,6 @@
 
     </data>
 
-
-
-
-
-
-
     <androidx.cardview.widget.CardView
 
         android:layout_width="match_parent"
@@ -34,10 +28,11 @@
                 android:id="@+id/view"
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:background="#ffff"/>
+                android:background="#03fcca"/>
             <ImageView
                 android:id="@+id/user_image"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
+                android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
 
                 android:src="@{userModel.gender.equals(`Male`) ? @drawable/male_profile : @drawable/female_profile}" />
@@ -65,6 +60,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{userModel.name, default=Name}"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/txtURelation"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="@{userModel.relation, default=Relation}"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 

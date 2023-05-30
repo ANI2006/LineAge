@@ -16,7 +16,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.DialogAddRelationBinding;
+import com.app.lineage6.db.AppDatabase;
+import com.app.lineage6.db.Person;
 import com.app.lineage6.mvvm.RelationViewModel;
+
+import java.util.List;
 
 
 public class AddRelationDialog extends DialogFragment {
@@ -24,6 +28,7 @@ public class AddRelationDialog extends DialogFragment {
     private RelationViewModel relationViewModel;
     private String[] relationList;
     private String relation;
+
 
     @Nullable
     @Override
@@ -53,7 +58,9 @@ public class AddRelationDialog extends DialogFragment {
         relationViewModel = new ViewModelProvider(requireActivity()).get(RelationViewModel.class);
 
         binding.relationAddButton.setOnClickListener(v -> {
-                    relationViewModel.addRelation(binding.person1.getText().toString(),binding.relationBetween.getText().toString(),binding.person2.getText().toString() );
+                    relationViewModel.addRelation(binding.person1.getText().toString(),
+                            binding.relationBetween.getText().toString(),
+                            binding.person2.getText().toString() );
                     dismiss();
                 }
         );
@@ -74,6 +81,7 @@ public class AddRelationDialog extends DialogFragment {
                 // Do nothing
             }
         });
+
     }
 
 }

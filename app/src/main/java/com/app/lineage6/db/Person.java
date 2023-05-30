@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
@@ -13,7 +14,7 @@ public class Person implements Parcelable {
 
     public int uId;
 
-    @ColumnInfo(name="u_first_name")
+    @ColumnInfo(name="name")
     public String name;
 
 
@@ -69,9 +70,6 @@ public class Person implements Parcelable {
         dest.writeString(relation);
         dest.writeString(date);
 
-
-
-        // dest.writeString(imagePath);
     }
 
     @Override

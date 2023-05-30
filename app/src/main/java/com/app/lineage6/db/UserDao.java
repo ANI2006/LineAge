@@ -31,6 +31,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE uId=:id")
     Person getUser(int id);
 
+//     @Query("SELECT name FROM user")
+//    List<String> getUserNames();
+
 
 
 //    @Delete
