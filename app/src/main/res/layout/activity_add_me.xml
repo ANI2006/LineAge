@@ -7,7 +7,7 @@
     <data>
         <variable
             name="userModel"
-            type="com.app.lineage6.db.Person" />
+            type="com.app.lineage.db.Person" />
 
 
 
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="2"
-        tools:context="com.app.lineage6.ui.user.AddUserActivity">
+        tools:context="com.app.lineage.ui.user.AddUserActivity">
 
         <LinearLayout
             android:layout_width="match_parent"

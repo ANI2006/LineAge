@@ -15,7 +15,7 @@
             android:text="@string/make_relations"/>
 
 
-        <EditText
+        <AutoCompleteTextView
 
             android:id="@+id/person1"
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:textSize="20sp" />
 
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/person2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -70,16 +70,15 @@
             android:text="@string/add_relation_button"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="@color/red"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/person2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:enabled="@{person1.text.length() &gt; 0 &amp;&amp; person2.text.length() &gt; 0 &amp;&amp; relationBetween.text.length() &gt; 0}"
-
-
-            android:textStyle="bold" />
+            android:background="#0000FF"
+        android:textStyle="bold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

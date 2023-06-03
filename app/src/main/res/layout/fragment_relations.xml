@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.app.lineage6.ui.relations.RelationsFragment">
+    tools:context="com.app.lineage.ui.relations.RelationsFragment">
     <SearchView
         android:id="@+id/search_view"
         android:layout_width="0dp"
@@ -31,11 +31,11 @@
         android:id="@+id/add_relation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginEnd="10dp"
         android:src="@drawable/ic_baseline_add"
         android:tint="@color/white"
-        app:backgroundTint="#03fcca"
+        app:backgroundTint="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

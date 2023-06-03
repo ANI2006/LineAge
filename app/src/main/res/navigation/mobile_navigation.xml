@@ -7,19 +7,15 @@
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.app.lineage6.ui.user.UserFragment"
+        android:name="com.app.lineage.ui.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />
 
     <fragment
         android:id="@+id/navigation_relations"
-        android:name="com.app.lineage6.ui.relations.RelationsFragment"
+        android:name="com.app.lineage.ui.relations.RelationsFragment"
         android:label="@string/title_relations"
         tools:layout="@layout/fragment_relations" />
 
-    <fragment
-        android:id="@+id/navigation_settings"
-        android:name="com.app.lineage6.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+
 </navigation>

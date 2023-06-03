@@ -11,10 +11,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LineAge6"
+        android:theme="@style/Theme.LineAge"
         tools:targetApi="31">
         <activity
-            android:name="com.app.lineage6.MainActivity"
+            android:name="com.app.lineage.MainActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -23,8 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.app.lineage6.ui.user.AddUserActivity"></activity>
-        <activity android:name="com.app.lineage6.ui.user.AddMeActivity"></activity>
+        <activity android:name="com.app.lineage.ui.user.AddUserActivity"></activity>
+        <activity android:name="com.app.lineage.ui.user.AddMeActivity"></activity>
 
     </application>
 

@@ -7,7 +7,10 @@
     <data>
         <variable
             name="userModel"
-            type="com.app.lineage6.db.Person" />
+            type="com.app.lineage.db.Person" />
+        <variable
+            name="listener"
+            type="com.app.lineage.db.OnClickItemInterface" />
 
 
 
@@ -18,13 +21,13 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:weightSum="2"
-        tools:context="com.app.lineage6.ui.user.AddUserActivity">
+        tools:context="com.app.lineage.ui.user.AddUserActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_weight="1.75"
+            android:layout_weight="1.7"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -44,7 +47,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
 
-                    android:src="@{userModel.gender.equals(`Female`) ? @drawable/female_profile : @drawable/male_profile}" />
+                    android:src="@{userModel.imageUrl}" />
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -202,28 +205,32 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+           android:gravity="center"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="0dp"
-
-            android:layout_weight="0.25">
-
+            android:layout_weight="0.3">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnAddUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="15dp"
                 android:enabled="@{edtName.text.length()>0}"
-
-
-
-
-
                 android:text="Add"
                 app:cornerRadius="10dp" />
 
+<!--            <com.google.android.material.button.MaterialButton-->
+<!--                android:id="@+id/btnDeleteUser"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:onClick="@{()-> listener.onClickItem(userModel, false)}"-->
+<!--                android:enabled="@{edtName.text.length()>0}"-->
+<!--                android:text="Delete"-->
+<!--                app:cornerRadius="10dp" />-->
+
+
+
         </LinearLayout>
+
     </LinearLayout>
 </layout>
