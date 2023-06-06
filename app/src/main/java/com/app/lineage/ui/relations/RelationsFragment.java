@@ -77,7 +77,7 @@ public class RelationsFragment extends Fragment {
     private void filterList(String text) {
         List<Relation> filteredList = new ArrayList<>();
         List<Relation> relationList = relationViewModel.getRelations().getValue();
-        //if(goalList!=null) {
+
         for (Relation relation : relationList) {
             if (relation.person1.toLowerCase().startsWith(text.toLowerCase()) || relation.person2.toLowerCase().startsWith(text.toLowerCase()) ||relation.relationBetween.toLowerCase().startsWith(text.toLowerCase())) {
                 filteredList.add(relation);

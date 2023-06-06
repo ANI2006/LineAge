@@ -1,4 +1,6 @@
 package com.app.lineage.ui.user;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -101,12 +103,13 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                userViewModel.deleteUser(adapter.getUserAt(viewHolder.getAdapterPosition()));
+                showDeleteConfirmationDialog(viewHolder.getAdapterPosition());
             }
         }).attachToRecyclerView(binding.projectRecyclerView);
 
         return root;
     }
+
 
     @Override
     public void onClickItem(Person person, boolean isEdit) {
@@ -141,6 +144,31 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
         }else{
             adapter.setFilteredList(filteredList);
         }
+    }
+    private void showDeleteConfirmationDialog(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirm Deletion")
+                .setMessage("Are you sure you want to delete this user?")
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteUser(position);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        adapter.notifyItemChanged(position);
+                    }
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    private void deleteUser(int position) {
+        Person deletedPerson = adapter.getUserAt(position);
+        userViewModel.deleteUser(deletedPerson);
+        adapter.deleteUser(position);
     }
 }
 
