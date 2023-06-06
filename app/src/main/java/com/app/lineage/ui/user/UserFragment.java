@@ -1,10 +1,12 @@
 package com.app.lineage.ui.user;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.app.lineage.db.Relation;
 import com.app.lineage.db.UserDao;
 import com.app.lineage.mvvm.UserViewModel;
 import com.app.lineage.db.OnClickItemInterface;
@@ -51,6 +54,7 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
         // Set up the searchView
         searchView = root.findViewById(R.id.search_view);
 
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -59,16 +63,15 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                String searchStr=newText;
-                if (adapter != null) {
-                    adapter.getFilter().filter(newText);
-                }
+                filterList(newText);
                 return true;
             }
         });
 
         binding.projectRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new UserAdapter(this);
+        adapter.setPersonList(personList); // Add this line to set the initial list
+
         binding.projectRecyclerView.setAdapter(adapter);
 
         binding.addUser.setOnClickListener(view -> {
@@ -122,6 +125,22 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    private void filterList(String text) {
+        List<Person> filteredList = new ArrayList<>();
+        List<Person> relationList = userViewModel.getPersons().getValue();
+        //if(goalList!=null) {
+        for (Person person : personList) {
+            if (person.name.toLowerCase().startsWith(text.toLowerCase())) {
+                filteredList.add(person);
+            }
+        }
+        // }
+        if(filteredList.isEmpty()) {
+            Toast.makeText(getContext(), "No result found", Toast.LENGTH_SHORT).show();
+        }else{
+            adapter.setFilteredList(filteredList);
+        }
     }
 }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.app.lineage.db.AppDatabase;
 import com.app.lineage.db.DatabaseClient;
+import com.app.lineage.db.Relation;
 import com.app.lineage.db.RelationDao;
 import com.app.lineage.db.AppRepo;
 import com.app.lineage.db.Person;
@@ -31,6 +32,7 @@ public class UserViewModel extends AndroidViewModel {
 
 
     private MutableLiveData<List<Person>> users;
+
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -62,6 +64,9 @@ public class UserViewModel extends AndroidViewModel {
             appDatabase.userDao().insertUser(new Person());
         });
     }
+    public LiveData<List<Person>> getPersons() {
+        return users;
+    }
 
 
     public void updateUser(Person person){
@@ -84,17 +89,6 @@ public class UserViewModel extends AndroidViewModel {
     public LiveData<List<Person>> getUsers() {
         return users;
     }
-//    public LiveData<List<Person>> getUserNames() {
-//        return appRepo.getAllUserNames() ;
-//    }
-
-
-
-
-
-
-
-
 
     public LiveData<List<Person>> getAllUserLive(){
         return appRepo.getAllUserLive();

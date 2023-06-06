@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.lineage.db.OnClickItemInterface;
 import com.app.lineage.db.Person;
+import com.app.lineage.db.Relation;
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.UserItemLayoutBinding;
 
@@ -33,7 +34,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>  i
 
     public UserAdapter(OnClickItemInterface onClickItemInterface) {
         this.onClickItemInterface = onClickItemInterface;
-        this.getPersonListFilter=personList;
+        this.personList = new ArrayList<>();
+        this.getPersonListFilter = new ArrayList<>();
     }
 
     public UserAdapter() {
@@ -71,10 +73,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>  i
     }
 
     public void setUsers(List<Person> personList) {
-        this.personList = personList;
-
+        this.personList.clear();
+        this.personList.addAll(personList);
+        this.getPersonListFilter.clear();
+        this.getPersonListFilter.addAll(personList);
         notifyDataSetChanged();
     }
+
+    public void setFilteredList(List<Person> filteredList){
+        this.personList = filteredList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public Filter getFilter() {
@@ -82,31 +92,35 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>  i
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults filterResults = new FilterResults();
+                List<Person> filteredList = new ArrayList<>();
+
                 if (constraint == null || constraint.length() == 0) {
-                    filterResults.values = getPersonListFilter;
-                    filterResults.count = getPersonListFilter.size();
+                    filteredList.addAll(getPersonListFilter);
                 } else {
                     String searchStr = constraint.toString().toLowerCase();
-                    List<Person> personModels = new ArrayList<>();
                     for (Person person : getPersonListFilter) {
                         if (person.name.toLowerCase().contains(searchStr)) {
-                            personModels.add(person);
+                            filteredList.add(person);
                         }
                     }
-                    filterResults.values = personModels;
-                    filterResults.count = personModels.size();
                 }
+
+                filterResults.values = filteredList;
+                filterResults.count = filteredList.size();
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                personList = (List<Person>) results.values;
+                personList.clear();
+                personList.addAll((List<Person>) results.values);
                 notifyDataSetChanged();
             }
         };
+
         return filter;
     }
+
 
 
 

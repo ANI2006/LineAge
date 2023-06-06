@@ -10,8 +10,10 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 
 
@@ -32,9 +34,19 @@ public class SignInDialog extends DialogFragment {
         // Get references to dialog views
         checkBox = dialogView.findViewById(R.id.checkbox_remember);
 
-        builder.setView(dialogView)
-                .setTitle("Sign In")
-                .setMessage("Are you signed in?")
+        builder.setView(dialogView);
+
+        // Customize the dialog appearance
+        TextView messageTextView = dialogView.findViewById(R.id.text_message);
+        CheckBox rememberCheckbox = dialogView.findViewById(R.id.checkbox_remember);
+
+        messageTextView.setText("Have you already submitted your data?");
+        messageTextView.setTextSize(18);
+        messageTextView.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black));
+
+        rememberCheckbox.setText("Don't ask again");
+
+        builder.setTitle("Add Data of Yourself")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -60,6 +72,7 @@ public class SignInDialog extends DialogFragment {
 
         return builder.create();
     }
+
 
     private void showAdditionalDetailsDialog() {
         Intent intent = new Intent(getActivity(), AddMeActivity.class);

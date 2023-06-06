@@ -29,11 +29,15 @@
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:background="@color/yellow"/>
-            <ImageView
-                android:id="@+id/user_image"
+            <com.google.android.material.imageview.ShapeableImageView
+
+            android:id="@+id/user_image"
                 android:layout_width="80dp"
                 android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
+                app:shapeAppearanceOverlay="@style/circular"
+
+
 
                 android:src="@{userModel.imageUrl}"
                 />

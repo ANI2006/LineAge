@@ -10,7 +10,7 @@
         android:id="@+id/text_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you signed in?"
+        android:text="Have you already submitted your data?"
         android:textSize="18sp"
         android:textColor="@android:color/black" />
 
