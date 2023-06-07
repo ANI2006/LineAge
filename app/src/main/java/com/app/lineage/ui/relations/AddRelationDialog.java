@@ -1,5 +1,6 @@
 package com.app.lineage.ui.relations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -20,15 +21,23 @@ import com.app.lineage.ui.user.UserFragment;
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.DialogAddRelationBinding;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 
 public class AddRelationDialog extends DialogFragment {
     private DialogAddRelationBinding binding;
     private RelationViewModel relationViewModel;
     private String[] relationList;
+
     private UserFragment userFragment;
-    private String[] personNames;
+    List<String> personNames1;
 
     private String relation;
+    private String[] personNamesArray;
+
+
 
 
     @Nullable
@@ -36,6 +45,7 @@ public class AddRelationDialog extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.dialog_add_relation, container, false);
         return binding.getRoot();
+
     }
 
 
@@ -51,10 +61,17 @@ public class AddRelationDialog extends DialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+//        Intent intent = getActivity().getIntent();
+//        ArrayList<String> personNames1 = (ArrayList<String>) intent.getSerializableExtra("value");
+
+
         relationList = getResources().getStringArray(R.array.relation_list);
-//        List<String> personNames = userFragment.getPersonNames();
-
-
+       personNames1=UserFragment.personNames;
+//        String[] personNamesArray = personNames.toArray(new String[personNames.size()]);
+//
+//        System.out.println(Arrays.toString(personNamesArray)); // Print the contents of the array
+//
+//
         initDropDown();
 
 
@@ -68,6 +85,7 @@ public class AddRelationDialog extends DialogFragment {
                 }
         );
     }
+
 
     private void initDropDown() {
         // Create an ArrayAdapter for relations
@@ -84,21 +102,33 @@ public class AddRelationDialog extends DialogFragment {
                 // Do nothing
             }
         });
-//        ArrayAdapter<String> nameAdapter = new ArrayAdapter<>(getContext(), android.R.layout.select_dialog_item, personNames);
-//        binding.person1.setAdapter(nameAdapter);
-//        binding.person2.setAdapter(nameAdapter);
-//
-//        binding.person1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-//                relation = (String) adapterView.getItemAtPosition(position);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//                // Do nothing
-//            }
-//        });
+
+        ArrayAdapter<String> nameAdapter = new ArrayAdapter<>(getContext(), android.R.layout.select_dialog_item, personNames1);
+        binding.person1.setAdapter(nameAdapter);
+        binding.person2.setAdapter(nameAdapter);
+
+        binding.person1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                relation = (String) adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        });
+        binding.person2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                relation = (String) adapterView.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                // Do nothing
+            }
+        });
 //        binding.person2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
 //            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -112,5 +142,7 @@ public class AddRelationDialog extends DialogFragment {
 //        });
 
     }
+
+
 
 }

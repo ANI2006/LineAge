@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,14 +23,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.app.lineage.MainActivity;
 import com.app.lineage.db.Relation;
 import com.app.lineage.db.UserDao;
 import com.app.lineage.mvvm.UserViewModel;
 import com.app.lineage.db.OnClickItemInterface;
 import com.app.lineage.db.Person;
+import com.app.lineage.ui.relations.AddRelationDialog;
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.FragmentUserBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +45,7 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
     private UserDao userDao;
     private UserAdapter adapter;
     private List<Person> personList = new ArrayList<>();
-    private List<String> personNames = new ArrayList<>();
+    public static List<String> personNames =new ArrayList<>();
 
     private UserViewModel userViewModel;
 
@@ -55,6 +60,7 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
         View root = binding.getRoot();
         // Set up the searchView
         searchView = root.findViewById(R.id.search_view);
+
 
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -87,11 +93,15 @@ public class UserFragment extends Fragment implements OnClickItemInterface {
             public void onChanged(List<Person> personList) {
                 if (personList != null) {
                     adapter.setUsers(personList);
-
+                   personNames = adapter.getPersonNames();
                     System.out.println(personNames);
                 }
             }
         });
+        Intent intent = new Intent(getActivity(), UserFragment.class);
+        intent.putExtra("value", (Serializable) personNames);
+        //startActivity(intent);
+
 
 
 

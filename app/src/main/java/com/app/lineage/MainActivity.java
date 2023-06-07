@@ -58,7 +58,7 @@ public class  MainActivity extends AppCompatActivity {
                     showSignInDialog();
                 }
             }
-        }, 900);
+        }, 600L);
 
     }
     private void showSignInDialog() {

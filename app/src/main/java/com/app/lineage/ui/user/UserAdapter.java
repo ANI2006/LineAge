@@ -84,6 +84,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         this.personList = filteredList;
         notifyDataSetChanged();
     }
+    public List<String> getPersonNames() {
+        List<String> personNames = new ArrayList<>();
+        for (Person person : personList) {
+            personNames.add(person.name);
+        }
+        return personNames;
+    }
 
 
 

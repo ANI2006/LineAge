@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.lineage.mvvm.RelationViewModel;
 import com.app.lineage.db.Relation;
+import com.app.lineage.ui.user.UserAdapter;
 import com.app.lineage6.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -30,6 +31,7 @@ import java.util.List;
 public class RelationsFragment extends Fragment {
     private RelationsAdapter relationsAdapter;
     private RelationViewModel relationViewModel;
+
     private SearchView searchView;
     ActivityResultLauncher<Intent> infoLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -42,6 +44,9 @@ public class RelationsFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_relations, container, false);
         searchView = root.findViewById(R.id.search_view);
         searchView.clearFocus();
+
+
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
