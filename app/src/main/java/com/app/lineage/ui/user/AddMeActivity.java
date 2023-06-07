@@ -1,6 +1,7 @@
 package com.app.lineage.ui.user;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,7 +42,7 @@ public class AddMeActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     private ActivityAddMeBinding binding;
-    private String name,description,date,imageUrl;
+    private String name,description,date,imageUrl,phoneNumber;
     // private int age;
 
     private UserViewModel userViewModel;
@@ -77,6 +78,15 @@ public class AddMeActivity extends AppCompatActivity {
             }
             binding.edtDescription.setText(person.description);
             binding.etDateM.setText(person.date);
+            binding.edtNumberM.setText(person.phoneNumber);
+            if(imageUrl!=null) {
+                imageUrl = sharedPreferences.getString("imageUrl", null);
+
+                imageView.setImageURI(Uri.parse(imageUrl));}
+            else {
+                imageView.setImageResource(R.drawable.ic_person_24);
+            }
+
 
             isEdit=true;
 
@@ -96,12 +106,15 @@ public class AddMeActivity extends AppCompatActivity {
                 description = binding.edtDescription.getText().toString().trim();
                 date = binding.etDateM.getText().toString().trim();
                 imageUrl = sharedPreferences.getString("imageUrl", null);
+                phoneNumber = binding.edtNumberM.getText().toString().trim();
+
 
                 if(imageUrl!=null) {
+                    imageUrl = sharedPreferences.getString("imageUrl", null);
 
-                    imageView.setImageURI(Uri.parse(imageUrl));
-                }else {
-                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                    imageView.setImageURI(Uri.parse(imageUrl));}
+                else {
+                    imageView.setImageResource(R.drawable.ic_person_24);
                 }
 
                 person.name = name;
@@ -109,6 +122,7 @@ public class AddMeActivity extends AppCompatActivity {
                 person.description = description;
                 person.date = date;
                 person.imageUrl=imageUrl;
+                person.phoneNumber=phoneNumber;
 
                 userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
@@ -125,12 +139,13 @@ public class AddMeActivity extends AppCompatActivity {
                 }
                 description = binding.edtDescription.getText().toString().trim();
                 date = binding.etDateM.getText().toString().trim();
-                imageUrl = sharedPreferences.getString("imageUrl", null);
+                phoneNumber = binding.edtNumberM.getText().toString().trim();
+
 
                 if(imageUrl!=null) {
                     imageView.setImageURI(Uri.parse(imageUrl));
                 }else {
-                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                    imageView.setImageResource(R.drawable.ic_person_24);
                 }
                 person = new Person();
                 person.name = name;
@@ -138,6 +153,7 @@ public class AddMeActivity extends AppCompatActivity {
                 person.description = description;
                 person.date = date;
                 person.imageUrl=imageUrl;
+                person.phoneNumber=phoneNumber  ;
 
                 userViewModel.insertUser(person);
 
@@ -185,13 +201,19 @@ public class AddMeActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri=data.getData();
-        imageView.setImageURI(uri);
-        imageUrl= String.valueOf(uri);
+        if (requestCode == ImagePicker.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                Uri uri = data.getData();
+                imageView.setImageURI(uri);
+                imageUrl = String.valueOf(uri);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("imageUrl", imageUrl);
-        editor.apply();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("imageUrl", imageUrl);
+                editor.apply();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+
+            }
+        }
 
     }
 
@@ -210,15 +232,16 @@ public class AddMeActivity extends AppCompatActivity {
                 String selectedGender = radioButton.getText().toString().trim();
 
                 // Update the imageView based on the selected gender
-                if(imageUrl==null){
-                if (selectedGender.equalsIgnoreCase("Male")) {
-                    imageView.setImageResource(R.drawable.male_profile);
-                } else if (selectedGender.equalsIgnoreCase("Female")) {
-                    imageView.setImageResource(R.drawable.female_profile);
-                } else {
-                    imageView.setImageResource(R.drawable.ic_person_24);
-                }
-            }}
+//                if(imageUrl==null){
+//                if (selectedGender.equalsIgnoreCase("Male")) {
+//                    imageView.setImageResource(R.drawable.male_profile);
+//                } else if (selectedGender.equalsIgnoreCase("Female")) {
+//                    imageView.setImageResource(R.drawable.female_profile);
+//                } else {
+//                    imageView.setImageResource(R.drawable.ic_person_24);
+//                }
+//            }
+          }
         });
 
     }

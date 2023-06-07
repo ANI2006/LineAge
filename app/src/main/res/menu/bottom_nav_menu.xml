@@ -10,7 +10,7 @@
 
     <item
         android:id="@+id/navigation_relations"
-        android:icon="@drawable/star"
+        android:icon="@drawable/public_relation"
         android:title="@string/title_relations" />
 
 

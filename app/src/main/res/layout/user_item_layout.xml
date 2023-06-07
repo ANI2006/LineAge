@@ -36,6 +36,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_height="match_parent"
                 app:shapeAppearanceOverlay="@style/circular"
+                android:background="@drawable/ic_person_24"
 
 
 

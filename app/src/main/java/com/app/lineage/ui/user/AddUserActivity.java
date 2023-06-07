@@ -1,5 +1,6 @@
 package com.app.lineage.ui.user;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +46,6 @@ public class AddUserActivity extends AppCompatActivity {
     private String name,description,date,relation,imageUrl,phoneNumber;
    // private int age;
     private String[] relationList;
-    public  static String imageUri;
     private UserViewModel userViewModel;
     private SharedPreferences sharedPreferences;
 
@@ -59,6 +59,7 @@ public class AddUserActivity extends AppCompatActivity {
         binding= ActivityAddUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         etDate=findViewById(R.id.et_date);
+        imageView = findViewById(R.id.imageView);
 
         relationList = getResources().getStringArray(R.array.relation_list);
 
@@ -83,7 +84,6 @@ public class AddUserActivity extends AppCompatActivity {
             } else if (person.gender.equals("Female")) {
                 binding.radioButtonFemale.setChecked(true);
             }
-            //   binding.edtAge.setText(String.valueOf(projectModel.age));
             binding.edtDescription.setText(person.description);
             binding.etDate.setText(person.date);
             binding.edtRelation.setText(person.relation);
@@ -91,16 +91,16 @@ public class AddUserActivity extends AppCompatActivity {
             imageUrl = sharedPreferences.getString("imageUrl", null);
 
             if(imageUrl!=null){
-            binding.imageView.setImageURI(Uri.parse(person.imageUrl));}else {
-                binding.imageView.setImageResource(R.drawable.ic_person_24);
+            imageView.setImageURI(Uri.parse(person.imageUrl));
+            }else {
+                imageView.setImageResource(R.drawable.ic_person_24);
             }
             Log.i("alo", "onCreate: " + imageUrl);
 
 
             isEdit=true;
- }
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setShowHideAnimationEnabled(true);
+          }
+
 
         binding.btnAddUser.setOnClickListener(view -> {
             if (isEdit) {
@@ -117,12 +117,13 @@ public class AddUserActivity extends AppCompatActivity {
 
                 date = binding.etDate.getText().toString().trim();
                 relation = binding.edtRelation.getText().toString().trim();
-                imageUrl = sharedPreferences.getString("imageUrl", null);
-
+                if(imageUrl!=null) {
+                    imageUrl = sharedPreferences.getString("imageUrl", null);
+                }
                 if(imageUrl!=null){
-                imageUrl=imageUri;
-                imageView.setImageURI(Uri.parse(imageUrl));}else {
-                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                imageView.setImageURI(Uri.parse(imageUrl));}
+                else {
+                    imageView.setImageResource(R.drawable.ic_person_24);
                 }
 
 
@@ -152,13 +153,12 @@ public class AddUserActivity extends AppCompatActivity {
                 date = binding.etDate.getText().toString().trim();
                 relation = binding.edtRelation.getText().toString().trim();
                 phoneNumber = binding.edtNumber.getText().toString().trim();
-                imageUrl = sharedPreferences.getString("imageUrl", null);
+
 
                 if(imageUrl!=null) {
-                    imageUrl = imageUri;
                     imageView.setImageURI(Uri.parse(imageUrl));
                 }else {
-                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                    imageView.setImageResource(R.drawable.ic_person_24);
                 }
 
 
@@ -201,8 +201,6 @@ public class AddUserActivity extends AppCompatActivity {
 
         imageView=findViewById(R.id.imageView);
         button= findViewById(R.id.floatingActionButton);
-        //imageUrl = sharedPreferences.getString("imageUrl", null);
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,16 +221,19 @@ public class AddUserActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-         Uri uri=data.getData();
-        imageView.setImageURI(uri);
-        imageUrl= String.valueOf(uri);
-        imageUri=imageUrl;
-        System.out.println(imageUri);
+        if (requestCode == ImagePicker.REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                Uri uri = data.getData();
+                imageView.setImageURI(uri);
+                imageUrl = String.valueOf(uri);
 
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("imageUrl", imageUrl);
-        editor.apply();
-
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("imageUrl", imageUrl);
+                editor.apply();
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+                // Handle the case when the user cancels the image picker
+            }
+        }
 
     }
 
@@ -243,24 +244,14 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void initDropDown() {
-        imageView = findViewById(R.id.imageView);
+       imageView = findViewById(R.id.imageView);
         binding.radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = findViewById(checkedId);
                 String selectedGender = radioButton.getText().toString().trim();
-                //
 
 
-                if(imageUrl==null){
-                if (selectedGender.equalsIgnoreCase("Male")) {
-                    imageView.setImageResource(R.drawable.male_profile);
-                } else if (selectedGender.equalsIgnoreCase("Female")) {
-                    imageView.setImageResource(R.drawable.female_profile);
-                } else {
-                    imageView.setImageResource(R.drawable.ic_person_24);
-                }
-            }
             }
         });
 
