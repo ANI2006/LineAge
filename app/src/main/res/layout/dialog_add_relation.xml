@@ -5,7 +5,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:padding="16dp">
         <TextView
             android:layout_width="match_parent"
@@ -15,13 +14,15 @@
             android:text="@string/make_relations"/>
 
 
-        <AutoCompleteTextView
+       <TextView
 
             android:id="@+id/person1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+           android:textColor="@color/black"
             android:inputType="textCapWords"
+           android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
 
 
             android:hint="@string/person1"
@@ -36,6 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:textColor="@color/black"
+
             app:layout_constraintTop_toBottomOf="@id/person1"
             app:layout_constraintBottom_toTopOf="@id/person2"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,14 +48,17 @@
             android:textSize="20sp" />
 
 
-        <AutoCompleteTextView
+        <TextView
             android:id="@+id/person2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:hint="@string/person2"
             android:textSize="20sp"
+            android:textColor="@color/black"
+
             android:inputType="textCapWords"
+            android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
 
             app:layout_constraintTop_toBottomOf="@id/relation_between"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -72,6 +78,7 @@
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="20sp"
+
             app:layout_constraintTop_toBottomOf="@id/person2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

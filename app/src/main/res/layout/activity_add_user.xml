@@ -36,8 +36,8 @@
                 android:layout_height="300dp">
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
-                    android:background="@color/white"
                     android:layout_width="300dp"
+
                     android:layout_height="300dp"
                     app:shapeAppearanceOverlay="@style/circular"
                     app:strokeWidth="10dp"
@@ -46,8 +46,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-
-                    android:src="@{userModel.imageUrl}" />
+                     />
                     />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -166,19 +165,47 @@
 
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+
                 app:boxBackgroundMode="outline"
                 app:boxStrokeWidth="2dp"
                 app:hintAnimationEnabled="true">
 
                 <AutoCompleteTextView
                     android:id="@+id/edtRelation"
+                    android:paddingStart="14dp"
+
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:hint=" Select Relation" />
+                    android:layout_weight="1.6"
+
+                    android:hint="Relation" />
 
             </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+
+                    android:layout_weight="1"
+                    app:boxBackgroundMode="outline"
+                    android:layout_marginLeft="10dp"
+                    app:boxStrokeWidth="2dp"
+                    app:hintAnimationEnabled="true">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/edtNumber"
+                        android:layout_width="match_parent"
+                        android:paddingStart="14dp"
+
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.6"
+                        android:inputType="phone"
+                        android:hint="Phone Number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
 

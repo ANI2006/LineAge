@@ -3,9 +3,11 @@ package com.app.lineage.ui.user;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import android.widget.DatePicker;
@@ -36,8 +38,10 @@ public class AddMeActivity extends AppCompatActivity {
 
     ImageView imageView;
     FloatingActionButton button;
+    private SharedPreferences sharedPreferences;
+
     private ActivityAddMeBinding binding;
-    private String name,description,date;
+    private String name,description,date,imageUrl;
     // private int age;
 
     private UserViewModel userViewModel;
@@ -58,6 +62,7 @@ public class AddMeActivity extends AppCompatActivity {
 
         initDropDown();
         userViewModel= ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         if (getIntent().hasExtra("model")){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -90,11 +95,20 @@ public class AddMeActivity extends AppCompatActivity {
                 }
                 description = binding.edtDescription.getText().toString().trim();
                 date = binding.etDateM.getText().toString().trim();
+                imageUrl = sharedPreferences.getString("imageUrl", null);
+
+                if(imageUrl!=null) {
+
+                    imageView.setImageURI(Uri.parse(imageUrl));
+                }else {
+                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                }
 
                 person.name = name;
                 person.gender = selectedGender;
                 person.description = description;
                 person.date = date;
+                person.imageUrl=imageUrl;
 
                 userViewModel.updateUser(person);
                 Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
@@ -111,11 +125,19 @@ public class AddMeActivity extends AppCompatActivity {
                 }
                 description = binding.edtDescription.getText().toString().trim();
                 date = binding.etDateM.getText().toString().trim();
+                imageUrl = sharedPreferences.getString("imageUrl", null);
+
+                if(imageUrl!=null) {
+                    imageView.setImageURI(Uri.parse(imageUrl));
+                }else {
+                    binding.imageView.setImageResource(R.drawable.ic_person_24);
+                }
                 person = new Person();
                 person.name = name;
                 person.gender = selectedGender;
                 person.description = description;
                 person.date = date;
+                person.imageUrl=imageUrl;
 
                 userViewModel.insertUser(person);
 
@@ -165,6 +187,11 @@ public class AddMeActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri=data.getData();
         imageView.setImageURI(uri);
+        imageUrl= String.valueOf(uri);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("imageUrl", imageUrl);
+        editor.apply();
 
     }
 
@@ -183,6 +210,7 @@ public class AddMeActivity extends AppCompatActivity {
                 String selectedGender = radioButton.getText().toString().trim();
 
                 // Update the imageView based on the selected gender
+                if(imageUrl==null){
                 if (selectedGender.equalsIgnoreCase("Male")) {
                     imageView.setImageResource(R.drawable.male_profile);
                 } else if (selectedGender.equalsIgnoreCase("Female")) {
@@ -190,7 +218,7 @@ public class AddMeActivity extends AppCompatActivity {
                 } else {
                     imageView.setImageResource(R.drawable.ic_person_24);
                 }
-            }
+            }}
         });
 
     }

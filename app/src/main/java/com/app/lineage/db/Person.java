@@ -22,6 +22,7 @@ public class Person implements Parcelable {
     public String description;
     public String relation;
     public String imageUrl;
+    public String phoneNumber;
 
 
 
@@ -56,6 +57,7 @@ public class Person implements Parcelable {
         relation = in.readString();
         date = in.readString();
         imageUrl = in.readString();
+        phoneNumber = in.readString();
 
 
         // imagePath = in.readString();
@@ -72,6 +74,7 @@ public class Person implements Parcelable {
         dest.writeString(relation);
         dest.writeString(date);
         dest.writeString(imageUrl);
+        dest.writeString(phoneNumber);
 
 
     }

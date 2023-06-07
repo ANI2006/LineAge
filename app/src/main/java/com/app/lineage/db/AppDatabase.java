@@ -6,12 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {Person.class,Relation.class},exportSchema = false,version = 20)
+@Database(entities = {Person.class,Relation.class},exportSchema = false,version = 21)
 public abstract class AppDatabase extends RoomDatabase {
 
 
 
-    public static  final String DATABASE_NAME="user_in_database18.db";
+    public static  final String DATABASE_NAME="user_in_database19.db";
     public static AppDatabase instance;
     private static  final  Object LOCK=new Object();
 

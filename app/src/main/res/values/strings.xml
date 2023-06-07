@@ -4,8 +4,8 @@
     <string name="title_relations">Relations</string>
     <string name="title_settings">Settings</string>
     <string name="title_user">User</string>
-    <string name="person1">Enter the name of the User1</string>
-    <string name="person2">Enter the name of the User2</string>
+    <string name="person1">Select the name of the User 1</string>
+    <string name="person2">Select the name of the User 2</string>
 
     <string name="relation_between">Relation Between</string>
     <string name="add_relation_button">Add Relation</string>
