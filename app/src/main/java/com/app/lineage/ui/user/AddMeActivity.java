@@ -242,16 +242,7 @@ public class AddMeActivity extends AppCompatActivity {
                 RadioButton radioButton = findViewById(checkedId);
                 String selectedGender = radioButton.getText().toString().trim();
 
-                // Update the imageView based on the selected gender
-//                if(imageUrl==null){
-//                if (selectedGender.equalsIgnoreCase("Male")) {
-//                    imageView.setImageResource(R.drawable.male_profile);
-//                } else if (selectedGender.equalsIgnoreCase("Female")) {
-//                    imageView.setImageResource(R.drawable.female_profile);
-//                } else {
-//                    imageView.setImageResource(R.drawable.ic_person_24);
-//                }
-//            }
+
           }
         });
 

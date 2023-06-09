@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/search_view"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/user_item_layout"
-        />
+        tools:ignore="MissingConstraints" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

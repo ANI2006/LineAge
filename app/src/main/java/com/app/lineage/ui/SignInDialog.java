@@ -50,7 +50,13 @@ public class SignInDialog extends DialogFragment {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Handle signed in scenario
+                        if (checkBox.isChecked()) {
+                            // Remember user preference not to ask again
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putBoolean("show_signin_dialog", false);
+                            editor.apply();
+                        }
                         dismiss();
                     }
                 })
