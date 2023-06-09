@@ -27,6 +27,7 @@ import com.app.lineage.db.Person;
 import com.app.lineage.mvvm.UserViewModel;
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.ActivityAddMeBinding;
+import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -79,11 +80,16 @@ public class AddMeActivity extends AppCompatActivity {
             binding.edtDescription.setText(person.description);
             binding.etDateM.setText(person.date);
             binding.edtNumberM.setText(person.phoneNumber);
-            if(imageUrl!=null) {
-                imageUrl = sharedPreferences.getString("imageUrl", null);
 
-                imageView.setImageURI(Uri.parse(imageUrl));}
-            else {
+
+            imageUrl = sharedPreferences.getString("imageUrl", null);
+
+            if (imageUrl != null) {
+
+                Glide.with(this)
+                        .load(person.imageUrl)
+                        .into(imageView);
+            } else {
                 imageView.setImageResource(R.drawable.ic_person_24);
             }
 
@@ -105,15 +111,17 @@ public class AddMeActivity extends AppCompatActivity {
                 }
                 description = binding.edtDescription.getText().toString().trim();
                 date = binding.etDateM.getText().toString().trim();
-                imageUrl = sharedPreferences.getString("imageUrl", null);
+                person.imageUrl = sharedPreferences.getString("imageUrl", null);
                 phoneNumber = binding.edtNumberM.getText().toString().trim();
 
 
                 if(imageUrl!=null) {
                     imageUrl = sharedPreferences.getString("imageUrl", null);
-
-                    imageView.setImageURI(Uri.parse(imageUrl));}
-                else {
+                }
+                if (imageUrl != null) {
+                    Uri imageUri = Uri.parse(imageUrl);
+                    imageView.setImageURI(imageUri);
+                } else {
                     imageView.setImageResource(R.drawable.ic_person_24);
                 }
 
@@ -142,11 +150,13 @@ public class AddMeActivity extends AppCompatActivity {
                 phoneNumber = binding.edtNumberM.getText().toString().trim();
 
 
-                if(imageUrl!=null) {
-                    imageView.setImageURI(Uri.parse(imageUrl));
-                }else {
+                if (imageUrl != null) {
+                    Uri imageUri = Uri.parse(imageUrl);
+                    imageView.setImageURI(imageUri);
+                } else {
                     imageView.setImageResource(R.drawable.ic_person_24);
                 }
+
                 person = new Person();
                 person.name = name;
                 person.gender = selectedGender;
@@ -204,8 +214,9 @@ public class AddMeActivity extends AppCompatActivity {
         if (requestCode == ImagePicker.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 Uri uri = data.getData();
-                imageView.setImageURI(uri);
                 imageUrl = String.valueOf(uri);
+
+                imageView.setImageURI(Uri.parse(imageUrl));
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("imageUrl", imageUrl);

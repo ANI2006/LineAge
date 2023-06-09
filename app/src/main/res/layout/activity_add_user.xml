@@ -42,8 +42,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:shapeAppearanceOverlay="@style/circular"
+                    android:background="@drawable/ic_person_24"
 
-                                       app:strokeWidth="10dp" />
+                    app:strokeWidth="10dp" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floatingActionButton"
@@ -220,7 +221,7 @@
                 android:background="@color/red"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="@{edtName.text.length()>0}"
+                android:enabled="@{edtName.text.length()>0 }"
                 android:text="Add"
                 android:layout_marginTop="100dp"
                 android:layout_marginHorizontal="50dp"

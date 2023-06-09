@@ -30,6 +30,7 @@ import com.app.lineage.db.Person;
 import com.app.lineage.mvvm.UserViewModel;
 import com.app.lineage6.R;
 import com.app.lineage6.databinding.ActivityAddUserBinding;
+import com.bumptech.glide.Glide;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -44,7 +45,7 @@ public class AddUserActivity extends AppCompatActivity {
     FloatingActionButton button;
     private ActivityAddUserBinding binding;
     private String name,description,date,relation,imageUrl,phoneNumber;
-   // private int age;
+    // private int age;
     private String[] relationList;
     private UserViewModel userViewModel;
     private SharedPreferences sharedPreferences;
@@ -88,18 +89,23 @@ public class AddUserActivity extends AppCompatActivity {
             binding.etDate.setText(person.date);
             binding.edtRelation.setText(person.relation);
             binding.edtNumber.setText(person.phoneNumber);
+
+
             imageUrl = sharedPreferences.getString("imageUrl", null);
 
-            if(imageUrl!=null){
-            imageView.setImageURI(Uri.parse(person.imageUrl));
-            }else {
+            if (imageUrl != null) {
+
+                Glide.with(this)
+                        .load(person.imageUrl)
+                        .into(imageView);
+            } else {
                 imageView.setImageResource(R.drawable.ic_person_24);
             }
             Log.i("alo", "onCreate: " + imageUrl);
 
 
             isEdit=true;
-          }
+        }
 
 
         binding.btnAddUser.setOnClickListener(view -> {
@@ -120,11 +126,13 @@ public class AddUserActivity extends AppCompatActivity {
                 if(imageUrl!=null) {
                     imageUrl = sharedPreferences.getString("imageUrl", null);
                 }
-                if(imageUrl!=null){
-                imageView.setImageURI(Uri.parse(imageUrl));}
-                else {
+                if (imageUrl != null) {
+                    Uri imageUri = Uri.parse(imageUrl);
+                    imageView.setImageURI(imageUri);
+                } else {
                     imageView.setImageResource(R.drawable.ic_person_24);
                 }
+
 
 
 
@@ -155,11 +163,13 @@ public class AddUserActivity extends AppCompatActivity {
                 phoneNumber = binding.edtNumber.getText().toString().trim();
 
 
-                if(imageUrl!=null) {
-                    imageView.setImageURI(Uri.parse(imageUrl));
-                }else {
+                if (imageUrl != null) {
+                    Uri imageUri = Uri.parse(imageUrl);
+                    imageView.setImageURI(imageUri);
+                } else {
                     imageView.setImageResource(R.drawable.ic_person_24);
                 }
+
 
 
                 person = new Person();
@@ -180,22 +190,22 @@ public class AddUserActivity extends AppCompatActivity {
         });
 
         etDate.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog=new DatePickerDialog(AddUserActivity.this,new DatePickerDialog.OnDateSetListener() {
 
-                   @Override
-                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                       month=month+1;
-                       String date=dayOfMonth+"/"+month+"/"+year;
-                       etDate.setText(date);
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month=month+1;
+                        String date=dayOfMonth+"/"+month+"/"+year;
+                        etDate.setText(date);
 
-                   }
-               },year,month,day);
-               datePickerDialog.show();
-           }
+                    }
+                },year,month,day);
+                datePickerDialog.show();
+            }
 
-       });
+        });
 
 
 
@@ -224,12 +234,15 @@ public class AddUserActivity extends AppCompatActivity {
         if (requestCode == ImagePicker.REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 Uri uri = data.getData();
-                imageView.setImageURI(uri);
-                imageUrl = String.valueOf(uri);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("imageUrl", imageUrl);
-                editor.apply();
+                if (uri != null) {
+                    imageView.setImageURI(uri);
+                    imageUrl = String.valueOf(uri);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("imageUrl", imageUrl);
+                    editor.apply();
+                } else {
+                    Toast.makeText(this, "Failed to load image", Toast.LENGTH_SHORT).show();
+                }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 // Handle the case when the user cancels the image picker
             }
@@ -244,7 +257,7 @@ public class AddUserActivity extends AppCompatActivity {
     }
 
     private void initDropDown() {
-       imageView = findViewById(R.id.imageView);
+        imageView = findViewById(R.id.imageView);
         binding.radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

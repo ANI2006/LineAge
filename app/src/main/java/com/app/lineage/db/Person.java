@@ -96,4 +96,7 @@ public class Person implements Parcelable {
             return new Person[size];
         }
     };
+    public String getImageUrl() {
+        return imageUrl;
+    }
 }
